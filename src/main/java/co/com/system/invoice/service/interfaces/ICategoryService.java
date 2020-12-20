@@ -3,15 +3,16 @@ package co.com.system.invoice.service.interfaces;
 import java.util.List;
 
 import co.com.system.invoice.domain.CategoryDTO;
+import co.com.system.invoice.exception.AppException;
 
 /**@author yesid*
  */
 public interface ICategoryService {
 
-    public CategoryDTO save(CategoryDTO category) throws Exception;
+    public CategoryDTO save(CategoryDTO category)throws AppException;
 
-    public CategoryDTO findById(Long id) throws Exception;
+    public List<CategoryDTO> findAll() ;
 
-    public List<CategoryDTO> findAll() throws Exception;
+    public void delete(final Long idCategory)throws AppException;
 
 }

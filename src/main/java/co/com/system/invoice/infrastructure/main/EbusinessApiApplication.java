@@ -18,7 +18,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
     "co.com.system.invoice.api",
     "co.com.system.invoice.persistence.dataproviders",
     "co.com.system.invoice.service",
-    "co.com.system.invoice.translators"})
+    "co.com.system.invoice.translators",
+    "co.com.system.invoice.handlers",
+    "co.com.system.invoice.persistence.repository"})
 @EnableJpaRepositories(basePackages = {
     "co.com.system.invoice.persistence.repository"})
 @EntityScan(basePackages = "co.com.system.invoice.persistence.entity")

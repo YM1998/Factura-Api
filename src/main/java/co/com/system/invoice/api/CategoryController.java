@@ -1,19 +1,20 @@
 package co.com.system.invoice.api;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.system.invoice.constants.DateFormats;
 import co.com.system.invoice.domain.CategoryDTO;
+import co.com.system.invoice.exception.AppException;
 import co.com.system.invoice.service.interfaces.ICategoryService;
 
 /**@author Yesid
@@ -27,23 +28,20 @@ public class CategoryController {
 
 
     @GetMapping(value = "/getAll")
-    public List<CategoryDTO> getAll() throws Exception{
+    public List<CategoryDTO> getAll(){
          return categoryService.findAll();
     }
 
-    @GetMapping(value = "/{id}")
-    public CategoryDTO findById(@PathVariable("id") Long id) throws Exception{
-         return categoryService.findById(id);
-    }
 
     @PostMapping(value = "/save")
-    public CategoryDTO save(@RequestBody CategoryDTO category) throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(DateFormats.DD_MM_YYYY.getValue());
-        category.setCreationDate(dateFormat.format(new Date()));
-        category.setModificationDate(dateFormat.format(new Date()));
-        category.setCreationUser("system");
-        category.setModificationUser("system");
+    public CategoryDTO save(@RequestBody CategoryDTO category) throws AppException {
         return categoryService.save(category);
+    }
+
+    @DeleteMapping(value = "/delete/{idCategory}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("idCategory") Long idCategory) throws AppException {
+        categoryService.delete(idCategory);
     }
 
 }

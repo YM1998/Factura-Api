@@ -1,7 +1,6 @@
 package co.com.system.invoice.persistence.dataproviders;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,7 @@ import co.com.system.invoice.persistence.repository.CategoryRepository;
 import co.com.system.invoice.translators.Translator;
 
 @Component
-public class CategoryDataProvider implements ICategoryDataProvider{
+public class CategoryDataProvider implements ICategoryDataProvider {
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -29,35 +28,34 @@ public class CategoryDataProvider implements ICategoryDataProvider{
     private Translator<Category, CategoryDTO> categoryDTOTranslator;
 
     @Override
-    public CategoryDTO save(final CategoryDTO category) throws Exception {
+    public CategoryDTO save(final CategoryDTO category){
         Category categorySave = categoryRepository.save(categoryTranslator.translate(category));
         return categoryDTOTranslator.translate(categorySave);
     }
 
     @Override
-    public CategoryDTO findById(final Long id) throws Exception {
-       Optional<Category> category =  categoryRepository.findById(id);
-       return category.isPresent() ? categoryDTOTranslator.translate(category.get()) : null;
-    }
-
-    @Override
-    public List<CategoryDTO> findAll() throws Exception {
-        List<Category> categorys = categoryRepository.findAll();
+    public List<CategoryDTO> findAll() {
+        List<Category> categorys = categoryRepository.findAllSortName();
         return categorys.stream()
                         .map(categoryDTOTranslator::translate)
                         .collect(Collectors.toList());
     }
 
     @Override
-    public boolean  existName(final String name) throws Exception {
+    public boolean existName(final String name) {
         List<Category> categories = categoryRepository.findByName(name);
-        return categories!=null && !categories.isEmpty();
+        return categories != null && !categories.isEmpty();
     }
 
     @Override
-    public boolean existNameForOtherRecords(final String name, final Long id)
-            throws Exception {
-        return categoryRepository.existNameForOtherRecords(name, id);
+    public boolean existNameForOtherRecords(final String name, final Long id){
+        List<Category> categories = categoryRepository.findByNameForOtherRecords(name, id);
+        return categories != null && !categories.isEmpty();
+    }
+
+    @Override
+    public void delete(final Long idCategory){
+        categoryRepository.deleteById(idCategory);
     }
 
 }

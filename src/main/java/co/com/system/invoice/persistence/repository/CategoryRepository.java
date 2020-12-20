@@ -14,7 +14,11 @@ public interface CategoryRepository extends JpaRepository<Category, Long>{
     public List<Category> findByName(final String name);
 
 
-    @Query("select 1 from Category c  where nombre=?1 and idCategoria!=?2")
-    public boolean existNameForOtherRecords(final String name, final Long id);
+    @Query("select c from Category c  where nombre=?1 and idCategoria!=?2")
+    public List<Category>  findByNameForOtherRecords(final String name, final Long id);
+
+
+    @Query("select c from Category c order by c.nombre ")
+    public List<Category> findAllSortName();
 
 }

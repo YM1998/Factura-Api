@@ -1,4 +1,4 @@
-package co.com.system.invoice.constants.handlers;
+package co.com.system.invoice.handlers;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ErrorResponseDTO
                                     .builder()
                                     .codError(exception.getCodError())
-                                    .message(exception.getMessage()).build(), HttpStatus.BAD_REQUEST);
+                                    .messageError(exception.getMessage()).build(), HttpStatus.BAD_REQUEST);
     }
 
 
@@ -42,7 +42,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ErrorResponseDTO
                 .builder()
                 .codError("GENERAL-ERROR")
-                .message(exception.getMessage()).build(), HttpStatus.INTERNAL_SERVER_ERROR);
+                .messageError(exception.getMessage()).build(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(RuntimeException.class)
@@ -52,6 +52,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ErrorResponseDTO
                 .builder()
                 .codError("GENERAL-ERROR")
-                .message(exception.getMessage()).build(), HttpStatus.INTERNAL_SERVER_ERROR);
+                .messageError(exception.getMessage()).build(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

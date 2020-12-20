@@ -1,5 +1,7 @@
 package co.com.system.invoice.domain;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +11,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorResponseDTO {
+public class ErrorResponseDTO implements Serializable{
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     private String codError;
-    private String message;
+    private String messageError;
 
 }

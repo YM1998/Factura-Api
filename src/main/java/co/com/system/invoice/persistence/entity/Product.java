@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,22 +21,26 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * The persistent class for the "Categorias" database table.
+ * The persistent class for the productos database table.
  *
  */
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
 @Entity
-@Table(name="Categorias")
-public class Category implements Serializable {
+@Table(name="productos")
+public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_categoria")
-	private Long idCategoria;
+	@Column(name="id_producto")
+	private Long idProducto;
+
+	@Column(name="cantidad_inventario")
+	private Integer cantidadInventario;
+
+	private String descripcion;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_creacion")
@@ -48,8 +50,9 @@ public class Category implements Serializable {
 	@Column(name="fecha_modificacion")
 	private Date fechaModificacion;
 
-	@Column(name="nombre")
 	private String nombre;
+
+	private double precio;
 
 	@Column(name="user_creacion")
 	private String userCreacion;
@@ -58,10 +61,30 @@ public class Category implements Serializable {
 	private String userModificacion;
 
 	@ManyToOne
+	@JoinColumn(name="id_categoria")
+	private Category categoria;
+
+    @ManyToOne
     @JoinColumn(name="id_estado")
     private State estado;
 
-   @OneToMany(mappedBy="categoria")
-    private List<Product> productos;
+	//bi-directional many-to-one association to ProductosAtributo
+	@OneToMany(mappedBy="producto")
+	private List<ProductAtribute> productosAtributos;
+
+
+	public ProductAtribute addProductosAtributo(ProductAtribute productosAtributo) {
+		getProductosAtributos().add(productosAtributo);
+		productosAtributo.setProducto(this);
+
+		return productosAtributo;
+	}
+
+	public ProductAtribute removeProductosAtributo(ProductAtribute productosAtributo) {
+		getProductosAtributos().remove(productosAtributo);
+		productosAtributo.setProducto(null);
+
+		return productosAtributo;
+	}
 
 }

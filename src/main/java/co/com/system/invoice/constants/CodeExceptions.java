@@ -2,7 +2,8 @@ package co.com.system.invoice.constants;
 
 public enum CodeExceptions {
 
-    NAME_EXIST("S001");
+    NAME_EXIST("G001"),
+    CATEGORY_CANNOT_BE_DELETED("C001");
 
     private String value;
 

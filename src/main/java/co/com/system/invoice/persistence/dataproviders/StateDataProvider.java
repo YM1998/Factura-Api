@@ -14,7 +14,7 @@ import co.com.system.invoice.persistence.repository.StateReporsitory;
 import co.com.system.invoice.translators.Translator;
 
 @Component
-public class StateDataProvider implements IStateDataProvider{
+public class StateDataProvider implements IStateDataProvider {
 
     @Autowired
     private StateReporsitory stateReporsitory;
@@ -22,7 +22,6 @@ public class StateDataProvider implements IStateDataProvider{
     @Autowired
     @Qualifier("stateDTOTranslator")
     private Translator<State, StateDTO> stateDTOTranslator;
-
 
     @Override
     public List<StateDTO> findAll() {
