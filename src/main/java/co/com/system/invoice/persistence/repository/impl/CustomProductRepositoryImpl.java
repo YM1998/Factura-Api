@@ -1,4 +1,4 @@
-package co.com.system.invoice.persistence.repository;
+package co.com.system.invoice.persistence.repository.impl;
 
 import java.util.List;
 
@@ -11,16 +11,15 @@ import org.springframework.stereotype.Repository;
 import co.com.system.invoice.constants.GeneralConstans;
 import co.com.system.invoice.domain.ProductFilter;
 import co.com.system.invoice.persistence.entity.Product;
+import co.com.system.invoice.persistence.repository.CustomProductRepository;
 
 @Repository
-public class ProductImplRepository {
+public class CustomProductRepositoryImpl implements CustomProductRepository{
 
-    @Autowired
-    private EntityManager entityManager;
+    @Autowired private EntityManager entityManager;
 
-
+    @Override
     public List<Product> findByCriteria(final ProductFilter productFilter) {
-
         Query query = entityManager.createQuery(getQueryFindByCriteria(productFilter));
 
         if(productFilter.isCategory())
@@ -32,7 +31,6 @@ public class ProductImplRepository {
 
         return query.getResultList();
     }
-
 
 
     private String getQueryFindByCriteria(final ProductFilter productFilter) {
@@ -55,10 +53,6 @@ public class ProductImplRepository {
 
         return query.toString();
     }
-
-
-
-
 
 
 }

@@ -1,5 +1,6 @@
 package co.com.system.invoice.translators;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,23 +27,29 @@ public class ProductDTOTranslator implements Translator<Product, ProductDTO>{
                          .modificationDate(DateUtils.convertDateToString(input.getFechaModificacion(), DateFormats.DD_MM_YYYY.getValue()))
                          .name(input.getNombre())
                          .price(input.getPrecio())
+                         .cost(input.getCosto())
                          .attributes(getAttributes(input))
                          .userCreation(input.getUserCreacion())
                          .userModification(input.getUserModificacion())
+                         .statusId(input.getEstado()!=null? input.getEstado().getIdEstado():null)
+                         .statusName(input.getEstado()!=null? input.getEstado().getNombre():null)
+                         .codigo(input.getCodigo())
+                         .iva(input.getIva())
                          .build();
     }
 
 
     private List<AttributeDTO> getAttributes(Product input){
         if(input.getProductosAtributos()==null || input.getProductosAtributos().isEmpty())
-            return null;
+            return new ArrayList<>();
 
         return input.getProductosAtributos()
                     .stream()
                     .map( productAttribute -> AttributeDTO.builder()
                                                           .idAttribute(productAttribute.getAtributo().getIdAttribute())
+                                                          .idProductAttribute(productAttribute.getIdProductoAtributo())
                                                           .name(productAttribute.getAtributo().getNombre())
-                                                          .valor(productAttribute.getValor()).build())
+                                                          .value(productAttribute.getValor()).build())
                     .collect(Collectors.toList());
 
     }

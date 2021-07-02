@@ -22,13 +22,14 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        String [] arrayGet = new String[]{"/category/**","/state/**","/product/**"};
-        String [] arrayPost = new String[]{"/category/**"};
+        String [] arrayGet = new String[]{"/category/**","/state/**","/product/**","/attribute/**"};
+        String [] arrayPost = new String[]{"/category/**","/product/**"};
         String [] arrayDelete = new String[]{"/category/delete/**"};
 
         http.authorizeRequests()
             .antMatchers(HttpMethod.GET,arrayGet).permitAll()
             .antMatchers(HttpMethod.POST,arrayPost).permitAll()
+            .antMatchers(HttpMethod.PUT,arrayPost).permitAll()
             .antMatchers(HttpMethod.DELETE,arrayDelete).permitAll()
             .anyRequest().authenticated()
             .and().cors().configurationSource(corsConfigurationSource());

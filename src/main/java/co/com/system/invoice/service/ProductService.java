@@ -7,15 +7,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.com.system.invoice.domain.ProductDTO;
-import co.com.system.invoice.domain.ProductFilter;
-import co.com.system.invoice.persistence.dataproviders.interfaces.IProductDataProvider;
+import co.com.system.invoice.domain.ProductUpdateDTO;
+import co.com.system.invoice.exception.AppException;
+import co.com.system.invoice.persistence.dataproviders.ProductDataProvider;
 import co.com.system.invoice.service.interfaces.IProductService;
 
 @Service
 public class ProductService implements IProductService{
 
-    @Autowired
-    private IProductDataProvider productDataProvider;
+    @Autowired private ProductDataProvider productDataProvider;
+
+    @Override
+    @Transactional
+    public void save(ProductDTO product) {
+         productDataProvider.save(product);
+    }
+
+    @Override
+    @Transactional
+    public void update(ProductUpdateDTO productUpdate) throws AppException {
+         productDataProvider.update(productUpdate);
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -24,9 +36,8 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<ProductDTO> findByCriteria(ProductFilter productFilter) {
-        return productDataProvider.findByCriteria(productFilter);
+    public ProductDTO findById(Long idProduct) {
+       return productDataProvider.findById(idProduct);
     }
 
     @Override
@@ -34,4 +45,8 @@ public class ProductService implements IProductService{
         return productDataProvider.findAll();
     }
 
+    @Override
+    public List<ProductDTO> findByNameOrCode(String filter) {
+        return productDataProvider.findByNameOrCode(filter);
+    }
 }

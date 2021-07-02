@@ -1,11 +1,15 @@
 package co.com.system.invoice.persistence.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,8 +38,11 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_producto")
 	private Long idProducto;
+
+	private String codigo;
 
 	@Column(name="cantidad_inventario")
 	private Integer cantidadInventario;
@@ -52,7 +59,9 @@ public class Product implements Serializable {
 
 	private String nombre;
 
-	private double precio;
+	private Double precio;
+	private Double costo;
+	private Double iva;
 
 	@Column(name="user_creacion")
 	private String userCreacion;
@@ -68,16 +77,18 @@ public class Product implements Serializable {
     @JoinColumn(name="id_estado")
     private State estado;
 
-	//bi-directional many-to-one association to ProductosAtributo
-	@OneToMany(mappedBy="producto")
+
+	@OneToMany(mappedBy="producto", cascade = CascadeType.ALL)
 	private List<ProductAtribute> productosAtributos;
 
 
-	public ProductAtribute addProductosAtributo(ProductAtribute productosAtributo) {
-		getProductosAtributos().add(productosAtributo);
-		productosAtributo.setProducto(this);
+	public void addProductosAtributo(ProductAtribute productosAtributo) {
+	    if(this.productosAtributos == null)
+	       this.productosAtributos = new ArrayList<>();
 
-		return productosAtributo;
+	    productosAtributo.setProducto(this);
+	    this.productosAtributos.add(productosAtributo);
+
 	}
 
 	public ProductAtribute removeProductosAtributo(ProductAtribute productosAtributo) {
@@ -86,5 +97,13 @@ public class Product implements Serializable {
 
 		return productosAtributo;
 	}
+
+	public boolean attributesIsEmpty() {
+        return !attributesNotEmpty();
+ }
+
+	 public boolean attributesNotEmpty() {
+	        return this.productosAtributos != null && !this.productosAtributos.isEmpty();
+	 }
 
 }

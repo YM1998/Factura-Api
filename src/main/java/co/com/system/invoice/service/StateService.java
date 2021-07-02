@@ -7,14 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.com.system.invoice.domain.StateDTO;
-import co.com.system.invoice.persistence.dataproviders.interfaces.IStateDataProvider;
+import co.com.system.invoice.persistence.dataproviders.StateDataProvider;
 import co.com.system.invoice.service.interfaces.IStateService;
 
 @Service
 public class StateService implements IStateService{
 
-    @Autowired
-    private IStateDataProvider stateDataProvider;
+    @Autowired private StateDataProvider stateDataProvider;
 
     @Override
     @Transactional(readOnly = true)

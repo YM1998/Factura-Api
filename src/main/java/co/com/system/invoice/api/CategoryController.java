@@ -23,19 +23,17 @@ import co.com.system.invoice.service.interfaces.ICategoryService;
 @RequestMapping(value = "/category")
 public class CategoryController {
 
-    @Autowired
-    private ICategoryService categoryService;
-
+    @Autowired private ICategoryService categoryService;
 
     @GetMapping(value = "/getAll")
     public List<CategoryDTO> getAll(){
          return categoryService.findAll();
     }
 
-
     @PostMapping(value = "/save")
-    public CategoryDTO save(@RequestBody CategoryDTO category) throws AppException {
-        return categoryService.save(category);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void  save(@RequestBody CategoryDTO category) throws AppException {
+       categoryService.save(category);
     }
 
     @DeleteMapping(value = "/delete/{idCategory}")

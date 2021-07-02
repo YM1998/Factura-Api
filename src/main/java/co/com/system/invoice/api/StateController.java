@@ -16,12 +16,10 @@ import co.com.system.invoice.service.interfaces.IStateService;
 @RequestMapping(value = "/state")
 public class StateController {
 
-    @Autowired
-    private IStateService stateService;
-
+    @Autowired private IStateService stateService;
 
     @GetMapping(value = "/getAll")
-    public List<StateDTO> getAll() throws Exception{
+    public List<StateDTO> getAll(){
          return stateService.findAll();
     }
 

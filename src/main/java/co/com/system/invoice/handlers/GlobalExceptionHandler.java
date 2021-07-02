@@ -23,6 +23,7 @@ import lombok.extern.log4j.Log4j2;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+
     @ExceptionHandler(AppException.class)
     public ResponseEntity<ErrorResponseDTO> handlingApplicationException(
             final HttpServletRequest request,

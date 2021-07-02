@@ -10,7 +10,9 @@ public class AttributeDTOTranslator implements Translator<Attribute, AttributeDT
 
     @Override
     public AttributeDTO translate(Attribute input) {
-        return AttributeDTO.builder().idAttribute(input.getIdAttribute()).name(input.getNombre()).build();
+        return AttributeDTO.builder()
+                           .idAttribute(input.getIdAttribute())
+                           .name(input.getNombre()).build();
     }
 
 }

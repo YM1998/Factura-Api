@@ -30,12 +30,18 @@ public class Attribute implements Serializable {
 
 	@Id
 	@Column(name="id_atributo")
-	private Integer idAttribute;
+	private Long idAttribute;
 
 	private String nombre;
 
 	@OneToMany(mappedBy="atributo")
 	private List<ProductAtribute> productosAtributos;
+
+
+	public Attribute(Long idAttrbute) {
+	    this.idAttribute = idAttrbute;
+	}
+
 
 
 	public ProductAtribute addProductosAtributo(ProductAtribute productosAtributo) {
