@@ -10,4 +10,6 @@ public class GeneralConstans {
     public static final Integer AMOUNT_LOW_INVENTORY = 10;
     public static final Integer AMOUNT_STABLE_INVENTORY = 100;
 
+    public static final Integer IVA = 0;
+
 }

@@ -6,7 +6,7 @@ buildscript {
 		springBootVersion ='2.1.6.RELEASE'
 		postgresVersion = '42.2.5'
 		sonarQubeVersion ='2.6.2'
-		lombokVersion = '1.18.4'
+		lombokVersion = '1.18.12'
 		log4jVersion = '2.11.1'
 		commonsLangVersion ='3.9'
 		mockitoVersion = '2.8.47'
@@ -15,7 +15,7 @@ buildscript {
 		swaggerVersion = '2.9.2'
 		springOauthVersion = '2.3.4.RELEASE'
 		springSecurityJwt = '1.0.9.RELEASE'
-		
+
 		// component version settings
 		releaseNumber = '1'
 		sprintNumber = '0'
@@ -25,13 +25,13 @@ buildscript {
 		nexusUser = System.getenv('NEXUS_USER')
 		nexusPass = System.getenv('NEXUS_PASS')
 	}
-	
+
 	repositories {
 		mavenCentral()
 		maven {
-      		url "https://repo.spring.io/milestone" 
-			
-    	}
+			url "https://repo.spring.io/milestone"
+
+		}
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -44,7 +44,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'maven'
+//apply plugin: 'maven'
 
 /** ########### CODE QUALITY PLUGINS  **/
 
@@ -70,9 +70,27 @@ repositories {
 }
 
 dependencies {
-	implementation SPRING_BOOT_RUNTIME 
-	compile LOMBOK, LOG4J2, COMMONS_LANG, SWAGGER, JPA_PERSISTENCE, SPRING_SECURITY_OAUTH, SPRING_SECURITY_JWT
-	testImplementation SPRING_BOOT_UT, MOCKING
+	//implementation SPRING_BOOT_RUNTIME
+	//compile LOMBOK, LOG4J2, COMMONS_LANG, SWAGGER, JPA_PERSISTENCE, SPRING_SECURITY_OAUTH, SPRING_SECURITY_JWT
+	//testImplementation SPRING_BOOT_UT, MOCKING
+	// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
+	testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework:spring-context-support'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.postgresql:postgresql:42.2.5'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.mockito:mockito-core:2.8.47'
+	compileOnly 'org.projectlombok:lombok:1.18.24'
+	annotationProcessor 'org.projectlombok:lombok:1.18.24'
+	testCompileOnly 'org.projectlombok:lombok:1.18.24'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+	implementation "org.mapstruct:mapstruct:1.4.2.Final"
+	annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
+	implementation 'org.springframework.security:spring-security-jwt:1.0.9.RELEASE'
+	implementation 'org.springframework.security.oauth:spring-security-oauth2:2.3.4.RELEASE'
 }
 
 

@@ -1,6 +1,8 @@
 package co.com.system.invoice.utils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DateUtils {
@@ -9,22 +11,12 @@ public class DateUtils {
 
     }
 
-    public static String convertDateToString(final Date date, final String  format) {
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-            return simpleDateFormat.format(date);
-        }catch(Exception ex) {
-            return null;
-        }
+    public static String convertDateToString(final LocalDate date, final String  format) {
+        return date.format(DateTimeFormatter.ofPattern(format));
     }
 
-    public static Date convertStringToDate(final String input, final String  format) {
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-            return simpleDateFormat.parse(input);
-        }catch (Exception e) {
-            return null;
-        }
+    public static LocalDate convertStringToDate(final String input, final String  format) {
+        return  LocalDate.parse(input, DateTimeFormatter.ofPattern(format));
     }
 
 }
