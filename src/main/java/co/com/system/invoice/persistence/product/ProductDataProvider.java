@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import co.com.system.invoice.persistence.state.StateEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,8 @@ import co.com.system.invoice.constants.CodeExceptions;
 import co.com.system.invoice.model.Product;
 import co.com.system.invoice.model.ProductUpdate;
 import co.com.system.invoice.exception.AppException;
+
+import javax.swing.text.html.Option;
 
 @Repository
 public class ProductDataProvider {
@@ -26,8 +29,15 @@ public class ProductDataProvider {
         productRepository.save(productToPersist);
    }
 
-   public void update(ProductUpdate productUpdate) throws AppException {
-       ProductEntity currentProduct = validateUpdate(productUpdate);
+    public void updateStatus(Long idProduct, Long statusId ) throws AppException {
+        ProductEntity productEntity = validateUpdate(idProduct);
+        productEntity.setState(StateEntity.builder().id(statusId).build());
+        productRepository.save(productEntity);
+    }
+
+
+    public void update(ProductUpdate productUpdate) throws AppException {
+       ProductEntity currentProduct = validateUpdate(productUpdate.getProductDTO().getIdProduct());
        productMapper.translateReference(productUpdate.getProductDTO(), currentProduct);
        updateAndAddAttributes(productUpdate, currentProduct);
        productRepository.save(currentProduct);
@@ -45,10 +55,10 @@ public class ProductDataProvider {
    }
 
 
-   private ProductEntity validateUpdate(ProductUpdate productUpdateDTO) throws AppException {
-       ProductEntity product = findByIdRepository(productUpdateDTO.getProductDTO().getIdProduct());
-       if(product == null)  throw new AppException(CodeExceptions.PRODUCT_NOT_EXIST);
-       return product;
+   private ProductEntity validateUpdate(Long idProduct) throws AppException {
+       Optional<ProductEntity> product = productRepository.findById(idProduct);
+       if(!product.isPresent())  throw new AppException(CodeExceptions.PRODUCT_NOT_EXIST);
+       return product.get();
    }
 
 
@@ -58,16 +68,14 @@ public class ProductDataProvider {
     }
 
 
-    public Product findById(Long idProduct) {
-        ProductEntity product = findByIdRepository(idProduct);
-        return product!=null? productMapper.toData(product):null;
+    public Optional<Product> findById(Long idProduct) {
+        Optional<ProductEntity> product=  productRepository.findById(idProduct);
+        return product.isPresent()? Optional.of(productMapper.toData(product.get())): Optional.empty();
      }
 
-    private ProductEntity findByIdRepository(Long idProduct) {
-        Optional<ProductEntity> product = productRepository.findById(idProduct);
-        return product.isPresent()? product.get():null;
+     public void updateQuantityInventory(Long idProduct, Integer amount ) {
+        productRepository.updateQuantityInventory(idProduct, amount);
      }
-
 
      public List<Product> findAll() {
         return  productRepository.findAllProducts();

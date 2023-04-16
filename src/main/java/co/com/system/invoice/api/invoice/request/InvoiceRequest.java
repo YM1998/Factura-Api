@@ -24,5 +24,9 @@ public class InvoiceRequest {
     @NotBlank(message = "Ingrese el clientId")
     private Long clientId;
 
+    @NotNull(message = "Ingrese la forma de pago")
+    @NotBlank(message = "Ingrese la forma de pago")
+    private Integer paymentTypeId;
+
     private List<InvoiceDetailRequest> invoiceDetails;
 }

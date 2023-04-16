@@ -37,5 +37,9 @@ public interface ProductRepository extends  JpaRepository<ProductEntity, Long>{
 
     public ProductEntity findByCode(final String code);
 
+    @Modifying
+    @Query("update ProductEntity p set p.inventoryQuantity = p.inventoryQuantity + :amount  where p.id = :id ")
+    public void updateQuantityInventory(@Param("id") Long id, @Param("amount") Integer amount);
+
 
 }

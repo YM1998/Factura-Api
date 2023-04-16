@@ -11,8 +11,6 @@ import javax.validation.Valid;
 
 /**@author Yesid
  */
-@RestController
-@RequestMapping(value = "/invoice")
 public interface IInvoiceController {
 
 

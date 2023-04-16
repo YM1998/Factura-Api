@@ -56,5 +56,10 @@ public class ProductController implements  IProductController {
         return getProductService.findByCode(code);
     }
 
+    @Override
+    public void updateStatus(Long idProduct, Long statusId) throws AppException {
+        updateProductService.updateStatus(idProduct, statusId);
+    }
+
 
 }

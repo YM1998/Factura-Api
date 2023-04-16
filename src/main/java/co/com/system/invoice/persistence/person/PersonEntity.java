@@ -28,7 +28,10 @@ public class PersonEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column
-	private Long id;
-	private String name;
+	@Column private Long id;
+	@Column private String name;
+	@Column private String lastName;
+	@Column private String nit;
+	@Column private String email;
+	@Column private String phone;
 }

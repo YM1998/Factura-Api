@@ -13,4 +13,8 @@ public class Person {
 
     private Integer id;
     private String name;
+    private String lastName;
+    private String nit;
+    private String email;
+    private String phone;
 }

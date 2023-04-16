@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface AttributeRepository extends JpaRepository<AttributeEntity, Integer> {
 
-   @Query("select a from AttributeEntity a order by a.name asc")
-    public List<AttributeEntity> findAllOrderByName();
+    public List<AttributeEntity> findAllByOrderByNameAsc();
 }

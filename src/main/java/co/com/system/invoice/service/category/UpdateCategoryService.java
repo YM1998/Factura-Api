@@ -20,12 +20,25 @@ public class UpdateCategoryService {
         if(categoryPersist == null)  throw new AppException(CodeExceptions.CATEGORY_NOT_EXIST);
 
         categoryPersist.setName(category.getName());
-        categoryPersist.setIdStatus(categoryPersist.getIdStatus());
+        categoryPersist.setIdStatus(category.getIdStatus());
         categoryPersist.setModificationUser(category.getCreationUser());
         validateName(categoryPersist);
         categoryDataProvider.save(categoryPersist);
     }
 
+
+
+    @Transactional
+    public void updateStatus(Category category) throws AppException {
+        Category categoryPersist = categoryDataProvider.findById(category.getIdCategory());
+        if(categoryPersist == null)  throw new AppException(CodeExceptions.CATEGORY_NOT_EXIST);
+
+        categoryPersist.setName(category.getName());
+        categoryPersist.setIdStatus(category.getIdStatus());
+        categoryPersist.setModificationUser(category.getCreationUser());
+        validateName(categoryPersist);
+        categoryDataProvider.save(categoryPersist);
+    }
 
     private void validateName(final Category category) throws AppException{
         if(categoryDataProvider.existNameForOtherRecords(category.getName(), category.getIdCategory()))

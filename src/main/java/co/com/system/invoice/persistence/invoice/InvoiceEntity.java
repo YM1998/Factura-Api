@@ -6,8 +6,13 @@ import java.util.List;
 
 import javax.persistence.*;
 
+
+import co.com.system.invoice.persistence.client.ClientEntity;
 import co.com.system.invoice.persistence.invoice.detail.InvoiceDetailEntity;
+import co.com.system.invoice.persistence.payment.type.PaymentTypeEntity;
 import co.com.system.invoice.persistence.person.PersonEntity;
+import co.com.system.invoice.persistence.seller.SellerEntity;
+import co.com.system.invoice.persistence.sellingpoint.SellingPointEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,11 +43,19 @@ public class InvoiceEntity implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="client_id")
-	private PersonEntity client;
+	private ClientEntity client;
 
 	@ManyToOne
 	@JoinColumn(name="seller_id")
-	private PersonEntity seller;
+	private SellerEntity seller;
+
+	@ManyToOne
+	@JoinColumn(name="selling_point_id")
+	private SellingPointEntity sellingPoint;
+
+	@ManyToOne
+	@JoinColumn(name="payment_type_id")
+	private PaymentTypeEntity paymentType;
 
 
 }

@@ -23,9 +23,11 @@ public class Invoice {
     private double iva;
     private double subtotal;
     private double total;
+    private Integer paymentTypeId;
     private List<InvoiceDetail> invoiceDetails;
     private Long clientId;
     private Long sellerId;
+    private Long sellingPointId;
 
 
     public boolean invoiceDetailsIsEmpty() {

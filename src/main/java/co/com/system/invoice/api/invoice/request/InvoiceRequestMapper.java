@@ -23,6 +23,7 @@ public class InvoiceRequestMapper {
                 .stream().map(this::mapperInvoiceDetail).collect(Collectors.toList());
 
         return Invoice.builder()
+                .paymentTypeId(invoiceRequest.getPaymentTypeId())
                 .clientId(invoiceRequest.getClientId())
                 .sellerId(invoiceRequest.getSellerId())
                 .iva(invoiceDetailList.stream().mapToDouble(InvoiceDetail::getIva).sum())

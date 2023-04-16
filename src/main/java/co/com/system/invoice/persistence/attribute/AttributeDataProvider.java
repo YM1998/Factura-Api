@@ -16,7 +16,7 @@ public class AttributeDataProvider {
 
 
     public List<Attribute> findAll() {
-        return attributeRepository.findAllOrderByName()
+        return attributeRepository.findAllByOrderByNameAsc()
                                    .stream()
                                    .map(attributeMapper::toData)
                                    .collect(Collectors.toList());

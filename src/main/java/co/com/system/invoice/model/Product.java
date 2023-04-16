@@ -119,8 +119,6 @@ public class Product implements Serializable {
     private Double iva;
 
 
-    @NotNull(message = "El campo usuario creacion es obligatorio")
-	@NotBlank(message = "El campo usuario creacion es obligatorio")
 	private String userCreation;
 
 	private String userModification;
