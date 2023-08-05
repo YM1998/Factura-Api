@@ -49,7 +49,7 @@ public class InvoiceRequestMapperTest {
                 .clientId(1L)
                 .sellerId(1L)
                 .paymentTypeId(1)
-                .invoiceDetails(invoiceDetailRequestList).build());
+                .invoiceDetails(invoiceDetailRequestList).build(), 1L);
 
 
         Assertions.assertAll(

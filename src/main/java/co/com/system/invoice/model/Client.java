@@ -14,4 +14,18 @@ public class Client {
     private Long id;
     private Person person;
 
+
+    public ClientResponse buildClientResponse(){
+        return ClientResponse.builder()
+                             .id(id)
+                             .name(person.getName())
+                             .email(person.getEmail())
+                             .nit(person.getNit())
+                             .phone(person.getPhone())
+                             .lastName(person.getLastName())
+                             .build();
+    }
+
+
+
 }

@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
@@ -21,4 +24,5 @@ public class InvoiceDetail {
     private double subtotal;
     private double total;
     private Long productId;
+    private Invoice invoice;
 }

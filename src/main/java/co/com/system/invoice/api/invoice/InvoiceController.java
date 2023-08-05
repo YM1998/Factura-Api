@@ -20,6 +20,6 @@ public class InvoiceController implements  IInvoiceController {
 
     @Override
     public void save(@Valid @RequestBody InvoiceRequest invoice) throws AppException {
-        invoiceService.save(invoiceRequestMapper.invoiceRequestToInvoice(invoice));
+        invoiceService.save(invoiceRequestMapper.invoiceRequestToInvoice(invoice,1L));
     }
 }

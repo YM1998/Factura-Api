@@ -2,6 +2,7 @@ package co.com.system.invoice.api.client;
 
 
 import co.com.system.invoice.model.Client;
+import co.com.system.invoice.model.ClientResponse;
 import co.com.system.invoice.model.Product;
 import co.com.system.invoice.service.client.GetClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ public class ClientController implements  IClientController{
 
 
     @Override
-    public Optional<Client> findById(@PathVariable("id") Long id) {
-        return getClientService.findById(id);
+    public Optional<ClientResponse> findById(@PathVariable("id") Long id) {
+        Optional<Client> client = getClientService.findById(id);
+        return client.isPresent() ? Optional.of(client.get().buildClientResponse()) : Optional.empty();
     }
 }

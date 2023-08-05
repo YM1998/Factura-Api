@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -17,15 +15,12 @@ import java.util.List;
 public class InvoiceRequest {
 
     @NotNull(message = "Ingrese el clientId")
-    @NotBlank(message = "Ingrese el clientId")
     private Long sellerId;
 
     @NotNull(message = "Ingrese el clientId")
-    @NotBlank(message = "Ingrese el clientId")
     private Long clientId;
 
     @NotNull(message = "Ingrese la forma de pago")
-    @NotBlank(message = "Ingrese la forma de pago")
     private Integer paymentTypeId;
 
     private List<InvoiceDetailRequest> invoiceDetails;

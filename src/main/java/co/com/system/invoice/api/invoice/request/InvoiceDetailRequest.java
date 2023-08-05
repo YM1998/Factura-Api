@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -17,15 +15,12 @@ public class InvoiceDetailRequest {
 
 
     @NotNull(message = "Ingrese el precio")
-    @NotBlank(message = "Ingrese el precio")
     private Double price;
 
     @NotNull(message = "Ingrese el producto")
-    @NotBlank(message = "Ingrese el producto")
     private String productCode;
 
     @NotNull(message = "Ingrese la cantidad")
-    @NotBlank(message = "Ingrese la cantidad")
     private Integer amount;
 
 

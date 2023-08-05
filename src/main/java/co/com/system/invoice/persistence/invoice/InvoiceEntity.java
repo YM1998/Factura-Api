@@ -37,7 +37,8 @@ public class InvoiceEntity implements Serializable {
 	@Column private double subtotal;
 	@Column private double total;
 
-	@OneToMany(mappedBy="invoice",fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy="invoice", cascade = CascadeType.ALL)
 	private List<InvoiceDetailEntity> invoiceDetailEntities;
 
 

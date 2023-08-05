@@ -1,5 +1,6 @@
 package co.com.system.invoice.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @Builder
-public class Person {
+public class ClientResponse {
 
     private Long id;
     private String name;

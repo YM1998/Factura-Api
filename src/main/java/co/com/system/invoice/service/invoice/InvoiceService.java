@@ -28,8 +28,8 @@ public class InvoiceService {
 
     public void save(Invoice invoice) throws  AppException {
       validateExceptions(invoice);
-      invoice.getInvoiceDetails().stream()
-             .forEach(invoiceDetail -> updateProductService.updateQuantityInventory(invoiceDetail.getProductId(), -(invoiceDetail.getAmount())));
+     /* invoice.getInvoiceDetails().stream()
+             .forEach(invoiceDetail -> updateProductService.updateQuantityInventory(invoiceDetail.getProductId(), -(invoiceDetail.getAmount())));*/
       invoiceDataProvider.save(invoice);
     }
 
