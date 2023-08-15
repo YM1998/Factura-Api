@@ -12,4 +12,10 @@ public class GeneralConstans {
 
     public static final Integer IVA = 0;
 
+    public static final String HTML_EXT =".html";
+    public static final String PDF_EXT =".pdf";
+    public static final String INVOICE_INITIAL ="NS";
+
+    public static final String URI_FILES_PDF ="C:\\Users\\yesid\\Documents\\facturas-pdf";
+
 }

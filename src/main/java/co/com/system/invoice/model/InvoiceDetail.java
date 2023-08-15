@@ -18,11 +18,12 @@ public class InvoiceDetail {
 
     private Long id;
     private Integer amount;
-    private double cost;
-    private double iva;
-    private double price;
-    private double subtotal;
-    private double total;
+    private Double cost;
+    private Double iva;
+    private Double price;
+    private Double subtotal;
+    private Double total;
     private Long productId;
     private Invoice invoice;
+    private String productName;
 }

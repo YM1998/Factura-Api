@@ -31,11 +31,11 @@ public class InvoiceEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column private Long id;
-	@Column private double cost;
+	@Column private Double cost;
 	@Column private LocalDate createdAt;
-	@Column private double iva;
-	@Column private double subtotal;
-	@Column private double total;
+	@Column private Double iva;
+	@Column private Double subtotal;
+	@Column private Double total;
 
 
 	@OneToMany(mappedBy="invoice", cascade = CascadeType.ALL)

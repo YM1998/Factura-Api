@@ -15,9 +15,6 @@ import java.util.List;
 public class InvoiceRequest {
 
     @NotNull(message = "Ingrese el clientId")
-    private Long sellerId;
-
-    @NotNull(message = "Ingrese el clientId")
     private Long clientId;
 
     @NotNull(message = "Ingrese la forma de pago")

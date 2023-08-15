@@ -20,14 +20,18 @@ import java.util.List;
 public class Invoice {
 
     private Long id;
-    private double cost;
+    private Double cost;
     private LocalDate createdAt;
-    private double iva;
-    private double subtotal;
-    private double total;
+    private Double iva;
+    private Double subtotal;
+    private Double total;
     private Integer paymentTypeId;
+    private String paymentTypeName;
     private List<InvoiceDetail> invoiceDetails;
     private Long clientId;
+    private String clientNit;
+    private String clientName;
+    private String clientNumber;
     private Long sellerId;
     private Long sellingPointId;
 

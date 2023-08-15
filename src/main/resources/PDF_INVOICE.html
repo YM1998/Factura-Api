@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<center><h1>Almacen Nicole y Su Moda</h1></center>
+<center><p><b>Nit:</b>11123344</p></center>
+<center><b>Telefono:</b>3004331450</center>
+<center><h2>Factura venta</h2>   <span th:text="${saleNumber}"></span> </center>
+<center><h2>Datos Cliemte</h2></center>
+<center><p><b>Nit:</b> <span th:text=" ${clientNit}"></span></p> </center>
+<center><p><b>Nombre:</b> <span th:text=" ${clientName}"></span> </p> </center>
+<center><p><b>Telefono:</b> <span th:text=" ${clientPhoneNumber}"></span></p></center>
+
+<hr/>
+<center>
+    <table style=" margin-left: auto;margin-right: auto;">
+        <tr>
+            <td><b>Prod</b></td>
+            <td><b>Cant</b></td>
+            <td><b>Precio</b></td>
+            <td><b>Total</b></td>
+        </tr>
+
+        <tr th:each="item : ${items}">
+            <td> <span th:text="${item.productName}" /> </td>
+            <td><span th:text="${item.amount}" /></td>
+            <td><span th:text="'$'+${item.price}" /> </td>
+            <td><span th:text="'$'+${item.total}" /> </td>
+        </tr>
+
+    </table>
+</center>
+<hr/>
+
+<center><p><b>Subtotal:</b> <span th:text="'$'+${subtotal}" /></p> </center>
+<center><p><b>Total:</b> <span th:text="'$'+${total}"/> </p></center>
+<center><p><b>Iva:</b> <span th:text="'$'+${iva}"/></p></center>
+
+</body>
+</html>

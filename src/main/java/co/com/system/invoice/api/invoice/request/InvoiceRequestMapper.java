@@ -17,7 +17,7 @@ public class InvoiceRequestMapper {
 
     @Autowired private GetProductService productService;
 
-    public Invoice invoiceRequestToInvoice(InvoiceRequest invoiceRequest, Long sellingPointId) {
+    public Invoice invoiceRequestToInvoice(InvoiceRequest invoiceRequest, Long sellingPointId, Long sellerId) {
 
         List<InvoiceDetail> invoiceDetailList = invoiceRequest.getInvoiceDetails()
                 .stream().map(this::mapperInvoiceDetail).collect(Collectors.toList());
@@ -25,10 +25,11 @@ public class InvoiceRequestMapper {
         return Invoice.builder()
                 .paymentTypeId(invoiceRequest.getPaymentTypeId())
                 .clientId(invoiceRequest.getClientId())
-                .sellerId(invoiceRequest.getSellerId())
+                .sellerId(sellerId)
                 .iva(invoiceDetailList.stream().mapToDouble(InvoiceDetail::getIva).sum())
                 .subtotal(invoiceDetailList.stream().mapToDouble(InvoiceDetail::getSubtotal).sum())
                 .total(invoiceDetailList.stream().mapToDouble(InvoiceDetail::getTotal).sum())
+                .cost(invoiceDetailList.stream().mapToDouble(InvoiceDetail::getCost).sum())
                 .createdAt(LocalDate.now())
                 .sellingPointId(sellingPointId)
                 .invoiceDetails(invoiceDetailList)

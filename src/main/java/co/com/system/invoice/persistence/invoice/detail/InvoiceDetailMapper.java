@@ -22,4 +22,20 @@ public class InvoiceDetailMapper {
     }
 
 
+    public InvoiceDetail toData(InvoiceDetailEntity invoiceDetailEntity){
+        return  InvoiceDetail
+                .builder()
+                .total(invoiceDetailEntity.getTotal())
+                .price(invoiceDetailEntity.getPrice())
+                .iva(invoiceDetailEntity.getIva())
+                .cost(invoiceDetailEntity.getCost())
+                .amount(invoiceDetailEntity.getAmount())
+                .id(invoiceDetailEntity.getId())
+                .subtotal(invoiceDetailEntity.getSubtotal())
+                .id(invoiceDetailEntity.getId())
+                .productName(invoiceDetailEntity.getProduct().getName())
+                .build();
+    }
+
+
 }

@@ -45,6 +45,27 @@ public class InvoiceMapper {
     }
 
 
+    public Invoice toData(InvoiceEntity invoiceEntity){
+       return   Invoice.builder()
+                .iva(invoiceEntity.getIva())
+                .clientId(invoiceEntity.getClient().getId())
+                .clientName(invoiceEntity.getClient().getPerson().getName())
+                .clientNit(invoiceEntity.getClient().getPerson().getNit())
+                .clientNumber(invoiceEntity.getClient().getPerson().getPhone())
+                .sellerId(invoiceEntity.getSeller().getId())
+                .paymentTypeId(invoiceEntity.getPaymentType().getId())
+                .paymentTypeName(invoiceEntity.getPaymentType().getName())
+                .sellingPointId(invoiceEntity.getSellingPoint().getId())
+                .cost(invoiceEntity.getCost())
+                .createdAt(invoiceEntity.getCreatedAt())
+                .id(invoiceEntity.getId())
+                .total(invoiceEntity.getTotal())
+                .subtotal(invoiceEntity.getSubtotal())
+                .invoiceDetails(invoiceEntity.getInvoiceDetailEntities()
+                                             .stream()
+                                             .map(invoiceDetailMapper::toData).collect(Collectors.toList()))
+                .build();
+    }
 
 
 

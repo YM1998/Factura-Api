@@ -14,7 +14,9 @@ public enum CodeExceptions {
 
     PAYMENT_TYPE_NOT_FOUND("INV001"),
 
-    SELLING_POINT_NOT_FOUND("INV002");
+    SELLING_POINT_NOT_FOUND("INV002"),
+
+    PDF_ERROR("INV003");
 
 
     private String value;
