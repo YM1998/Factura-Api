@@ -34,6 +34,7 @@ public class InvoiceDetailMapper {
                 .subtotal(invoiceDetailEntity.getSubtotal())
                 .id(invoiceDetailEntity.getId())
                 .productName(invoiceDetailEntity.getProduct().getName())
+                .productId(invoiceDetailEntity.getProduct().getId())
                 .build();
     }
 

@@ -6,6 +6,7 @@ import co.com.system.invoice.model.Product;
 import co.com.system.invoice.persistence.attribute.AttributeEntity;
 import co.com.system.invoice.persistence.category.CategoryEntity;
 import co.com.system.invoice.persistence.product.attribute.ProductAttributeEntity;
+import co.com.system.invoice.persistence.sellingpoint.SellingPointEntity;
 import co.com.system.invoice.persistence.state.StateEntity;
 import co.com.system.invoice.utils.DateUtils;
 import org.springframework.stereotype.Component;
@@ -69,6 +70,7 @@ public class ProductMapper {
                 .statusName(input.getState()!=null? input.getState().getName():null)
                 .codigo(input.getCode())
                 .iva(input.getIva())
+                .sellingPointId(input.getSellingPoint().getId())
                 .build();
     }
 

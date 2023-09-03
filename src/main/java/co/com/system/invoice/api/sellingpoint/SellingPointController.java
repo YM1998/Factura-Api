@@ -25,7 +25,7 @@ public class SellingPointController implements  ISellingPointController{
     }
 
     @Override
-    public Optional<SellingPoint> findById(@PathVariable("id") Long id) {
+    public Optional<SellingPoint> findById(@PathVariable("id") Integer id) {
         return getSellingPointService.findById(id);
     }
 }

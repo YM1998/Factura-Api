@@ -17,7 +17,7 @@ public class InvoiceRequestMapper {
 
     @Autowired private GetProductService productService;
 
-    public Invoice invoiceRequestToInvoice(InvoiceRequest invoiceRequest, Long sellingPointId, Long sellerId) {
+    public Invoice invoiceRequestToInvoice(InvoiceRequest invoiceRequest, Integer sellingPointId, Long sellerId) {
 
         List<InvoiceDetail> invoiceDetailList = invoiceRequest.getInvoiceDetails()
                 .stream().map(this::mapperInvoiceDetail).collect(Collectors.toList());

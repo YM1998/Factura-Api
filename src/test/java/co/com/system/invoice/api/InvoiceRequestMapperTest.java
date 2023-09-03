@@ -47,9 +47,8 @@ public class InvoiceRequestMapperTest {
         Invoice invoice = invoiceRequestMapper.invoiceRequestToInvoice(InvoiceRequest
                 .builder()
                 .clientId(1L)
-                .sellerId(1L)
                 .paymentTypeId(1)
-                .invoiceDetails(invoiceDetailRequestList).build(), 1L);
+                .invoiceDetails(invoiceDetailRequestList).build(), 1,1L);
 
 
         Assertions.assertAll(

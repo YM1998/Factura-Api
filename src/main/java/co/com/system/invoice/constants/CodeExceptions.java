@@ -16,7 +16,9 @@ public enum CodeExceptions {
 
     SELLING_POINT_NOT_FOUND("INV002"),
 
-    PDF_ERROR("INV003");
+    PDF_ERROR("INV003"),
+
+    MOVEMENT_STOCK_TYPE_INVALID("MV0001");
 
 
     private String value;

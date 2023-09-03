@@ -13,7 +13,7 @@ public interface ISellingPointController {
     public  List<SellingPoint> getAll();
 
     @GetMapping(value = "/find/{id}")
-    public Optional<SellingPoint> findById(@PathVariable("id") Long id);
+    public Optional<SellingPoint> findById(@PathVariable("id") Integer id);
 
 
 

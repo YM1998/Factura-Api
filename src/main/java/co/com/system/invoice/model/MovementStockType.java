@@ -6,11 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
 @Builder
-public class SellingPoint {
+public class MovementStockType {
 
     private Integer id;
     private String name;

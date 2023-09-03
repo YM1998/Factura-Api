@@ -1,14 +1,20 @@
 package co.com.system.invoice.service.invoice;
 
+import co.com.system.invoice.api.invoice.request.InvoiceFindRequest;
+import co.com.system.invoice.api.invoice.response.InvoiceDataResponse;
+import co.com.system.invoice.api.invoice.response.InvoiceResponse;
 import co.com.system.invoice.constants.CodeExceptions;
 import co.com.system.invoice.constants.GeneralConstans;
+import co.com.system.invoice.constants.MovementStockTypes;
 import co.com.system.invoice.constants.PdfTemplate;
 import co.com.system.invoice.exception.AppException;
 import co.com.system.invoice.mappers.InvoiceDetailToInvoiceDetailPdf;
 import co.com.system.invoice.model.Invoice;
 import co.com.system.invoice.model.InvoiceDetail;
+import co.com.system.invoice.model.MovementStock;
 import co.com.system.invoice.model.Product;
 import co.com.system.invoice.persistence.invoice.InvoiceDataProvider;
+import co.com.system.invoice.service.movement.stock.MovementStockService;
 import co.com.system.invoice.service.pdf.PdfService;
 import co.com.system.invoice.service.client.GetClientService;
 import co.com.system.invoice.service.payment.type.PaymentTypeService;
@@ -18,9 +24,8 @@ import co.com.system.invoice.service.seller.GetSellerService;
 import co.com.system.invoice.service.sellingpoint.GetSellingPointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,13 +42,15 @@ public class InvoiceService {
     @Autowired private PdfService pdfService;
 
     @Autowired private InvoiceDetailToInvoiceDetailPdf invoiceDetailToInvoiceDetailPdf;
+
     @Autowired private GetProductService getProductService;
+
+    @Autowired private MovementStockService movementStockService;
 
 
     public Invoice save(Invoice invoice) throws  AppException {
         validateExceptions(invoice);
-     /* invoice.getInvoiceDetails().stream()
-             .forEach(invoiceDetail -> updateProductService.updateQuantityInventory(invoiceDetail.getProductId(), -(invoiceDetail.getAmount())));*/
+        updateStock(invoice);
         invoiceDataProvider.save(invoice);
         return invoice;
     }
@@ -67,8 +74,32 @@ public class InvoiceService {
         return pdfService.generatePdfFromHtml(PdfTemplate.PDF_INVOICE,parameters,GeneralConstans.INVOICE_INITIAL.concat(invoice.get().getId().toString()));
     }
 
+    public InvoiceDataResponse findByCreatedAt(InvoiceFindRequest invoiceFindRequest) {
+        InvoiceDataResponse invoiceResponse =
+                InvoiceDataResponse.builder()
+                                   .invoice(invoiceDataProvider.findByCreatedAt(invoiceFindRequest))
+                                   .build();
+
+        if(Objects.nonNull(invoiceResponse.getInvoice())) {
+          invoiceResponse.setTotal(invoiceResponse.getInvoice().stream().mapToDouble(Invoice::getTotal).sum());
+          invoiceResponse.setSubTotal(invoiceResponse.getInvoice().stream().mapToDouble(Invoice::getSubtotal).sum());
+          invoiceResponse.setCost(invoiceResponse.getInvoice().stream().mapToDouble(Invoice::getCost).sum());
+        }
+
+        return invoiceResponse;
+    }
 
 
+
+    private void updateStock(Invoice invoice) throws AppException {
+        for(InvoiceDetail invoiceDetail: invoice.getInvoiceDetails()) {
+            movementStockService.save(MovementStock
+                    .builder()
+                    .typeMovementStockId(MovementStockTypes.STOCK_OUT_BY_SALES.getValue())
+                    .movementValue(invoiceDetail.getAmount())
+                    .productId(invoiceDetail.getProductId()).build());
+        }
+    }
     private void  validateExceptions(Invoice invoice)  throws  AppException{
         getSellerService.findById(invoice.getSellerId())
                 .orElseThrow(()-> new AppException(CodeExceptions.SELLER_NOT_FOUND));

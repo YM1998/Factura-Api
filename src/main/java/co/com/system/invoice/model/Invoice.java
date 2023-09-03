@@ -33,7 +33,7 @@ public class Invoice {
     private String clientName;
     private String clientNumber;
     private Long sellerId;
-    private Long sellingPointId;
+    private Integer sellingPointId;
 
 
     public boolean invoiceDetailsIsEmpty() {

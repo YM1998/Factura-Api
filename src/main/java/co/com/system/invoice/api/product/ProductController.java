@@ -1,6 +1,7 @@
 package co.com.system.invoice.api.product;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -42,7 +43,12 @@ public class ProductController implements  IProductController {
     }
 
     @Override
-    public Product findById(@PathVariable("id") Long idProduct){
+    public List<Product> getAll(Integer sellingPointId) {
+        return getProductService.findBySellingPoint(sellingPointId);
+    }
+
+    @Override
+    public Optional<Product> findById(@PathVariable("id") Long idProduct){
          return getProductService.findById(idProduct);
     }
 

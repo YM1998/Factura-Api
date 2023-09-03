@@ -20,7 +20,7 @@ public class SellingDataProvider {
     }
 
 
-    public Optional<SellingPoint> findById(Long id) {
+    public Optional<SellingPoint> findById(Integer id) {
         Optional<SellingPointEntity> sellingPointEntity = sellingPointRepository.findById(id);
         return sellingPointEntity.isPresent() ? Optional.of(sellingMapper.toData(sellingPointEntity.get())):
                Optional.empty();

@@ -42,4 +42,8 @@ public interface ProductRepository extends  JpaRepository<ProductEntity, Long>{
     public void updateQuantityInventory(@Param("id") Long id, @Param("amount") Integer amount);
 
 
+    @Query("select p from  ProductEntity p where p.sellingPoint.id =:selling_point_id order by p.code asc ")
+    public List<ProductEntity> findBySellingPoint(@Param("selling_point_id") Integer sellingPointId);
+
+
 }

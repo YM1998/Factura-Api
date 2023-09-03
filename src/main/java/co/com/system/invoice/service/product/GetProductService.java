@@ -22,9 +22,8 @@ public class GetProductService {
         return productDataProvider.countByIdCategory(idCategory);
     }
 
-    public Product findById(Long idProduct) {
-        Optional<Product> product = productDataProvider.findById(idProduct);
-        return product.isPresent()? product.get(): null;
+    public  Optional<Product> findById(Long idProduct) {
+        return productDataProvider.findById(idProduct);
     }
 
     public List<Product> findAll() {
@@ -33,6 +32,11 @@ public class GetProductService {
                 .entrySet().stream()
                 .map(this::buildProductAndAttributes)
                 .collect(Collectors.toList());
+    }
+
+
+    public List<Product> findBySellingPoint(Integer sellingPointId) {
+        return productDataProvider.findBySellingPoint(sellingPointId);
     }
 
 

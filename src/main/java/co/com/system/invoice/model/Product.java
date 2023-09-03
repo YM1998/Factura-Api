@@ -129,6 +129,8 @@ public class Product implements Serializable {
 	private String categoryName;
 	private String statusName;
 
+    private Integer sellingPointId;
+
 	@NotNull(message = "El estado es obligatorio")
 	private Long statusId;
 	private List<Attribute> attributes;

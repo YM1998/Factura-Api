@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 public interface IProductController {
 
@@ -23,8 +24,11 @@ public interface IProductController {
     @GetMapping(value = "/getAll")
     public List<Product> getAll();
 
+    @GetMapping(value = "/getAll/{sellingPointId}")
+    public List<Product> getAll(@PathVariable("sellingPointId") Integer sellingPointId);
+
     @GetMapping(value = "/find/{id}")
-    public Product findById(@PathVariable("id") Long idProduct);
+    public Optional<Product> findById(@PathVariable("id") Long idProduct);
 
     @GetMapping(value = "/findByNameOrCode/{filter}")
     public List<Product> findByNameOrCode(@PathVariable("filter") String filter);

@@ -17,7 +17,7 @@ public class GetSellingPointService {
         return sellingDataProvider.findAll();
     }
 
-    public Optional<SellingPoint> findById(Long id) {
+    public Optional<SellingPoint> findById(Integer id) {
         return sellingDataProvider.findById(id);
     }
 

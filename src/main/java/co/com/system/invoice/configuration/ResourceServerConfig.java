@@ -24,8 +24,8 @@ public class ResourceServerConfig   extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        String [] arrayGet = new String[]{"/category/**","/state/**","/product/**","/attribute/**", "/payment-type/**", "/client/**","/selling/point/**","/invoice/**"};
-        String [] arrayPost = new String[]{"/category/**","/product/**","/invoice/**"};
+        String [] arrayGet = new String[]{"/category/**","/state/**","/product/**","/attribute/**", "/payment-type/**", "/client/**","/selling/point/**","/invoice/**","/movement-stock-type/**"};
+        String [] arrayPost = new String[]{"/category/**","/product/**","/invoice/**","/movement-stock/**","/movement-stock-type/**"};
         String [] arrayDelete = new String[]{"/category/**"};
 
         http.authorizeRequests()

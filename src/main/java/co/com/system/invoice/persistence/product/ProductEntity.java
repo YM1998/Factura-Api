@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 import co.com.system.invoice.persistence.category.CategoryEntity;
 import co.com.system.invoice.persistence.product.attribute.ProductAttributeEntity;
+import co.com.system.invoice.persistence.sellingpoint.SellingPointEntity;
 import co.com.system.invoice.persistence.state.StateEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -52,6 +53,11 @@ public class ProductEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name="state_id")
     private StateEntity state;
+
+	@ManyToOne
+	@JoinColumn(name="selling_point_id")
+	private SellingPointEntity sellingPoint;
+
 	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
 	private List<ProductAttributeEntity> attributeProducts;
 

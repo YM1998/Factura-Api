@@ -3,6 +3,7 @@ package co.com.system.invoice.persistence.product;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import co.com.system.invoice.persistence.state.StateEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,13 @@ public class ProductDataProvider {
 
      public List<Product> findAll() {
         return  productRepository.findAllProducts();
+    }
+
+    public List<Product> findBySellingPoint(Integer sellingPointId) {
+        return  productRepository.findBySellingPoint(sellingPointId)
+                                 .stream()
+                                 .map(productMapper::toData)
+                                 .collect(Collectors.toList());
     }
 
 
