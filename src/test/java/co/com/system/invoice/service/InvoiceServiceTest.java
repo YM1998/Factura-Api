@@ -7,9 +7,8 @@ import co.com.system.invoice.persistence.invoice.InvoiceDataProvider;
 import co.com.system.invoice.service.client.GetClientService;
 import co.com.system.invoice.service.invoice.InvoiceService;
 import co.com.system.invoice.service.payment.type.PaymentTypeService;
-import co.com.system.invoice.service.person.PersonService;
 import co.com.system.invoice.service.product.UpdateProductService;
-import co.com.system.invoice.service.seller.GetSellerService;
+import co.com.system.invoice.service.user.GetUserService;
 import co.com.system.invoice.service.sellingpoint.GetSellingPointService;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +27,7 @@ public class InvoiceServiceTest {
     @InjectMocks private InvoiceService invoiceService;
     @Mock private InvoiceDataProvider invoiceDataProvider;
     @Mock private GetClientService getClientService;
-    @Mock private GetSellerService getSellerService;
+    @Mock private GetUserService getSellerService;
     @Mock private PaymentTypeService paymentTypeService;
     @Mock private GetSellingPointService getSellingPointService;
 
@@ -54,7 +53,7 @@ public class InvoiceServiceTest {
     @Test
     public void saveSellerNotExist (){
         mockSeller(Optional.empty(), 1L);
-        invoice.setSellerId(1L);
+        invoice.setUserId(1L);
         AppException thrown = Assertions.assertThrows(AppException.class, () -> invoiceService.save(invoice));
         Assertions.assertEquals(CodeExceptions.SELLER_NOT_FOUND.getValue(), thrown.getCodError());
     }
@@ -63,9 +62,9 @@ public class InvoiceServiceTest {
 
     @Test
     public void saveClientNotExist (){
-        mockSeller(Optional.of(Seller.builder().build()), 1L);
+        mockSeller(Optional.of(User.builder().build()), 1L);
         mockClient(Optional.empty(), 2L);
-        invoice.setSellerId(1L);
+        invoice.setUserId(1L);
         invoice.setClientId(2L);
         AppException thrown = Assertions.assertThrows(AppException.class, () -> invoiceService.save(invoice));
         Assertions.assertEquals(CodeExceptions.CLIENT_NOT_FOUND.getValue(), thrown.getCodError());
@@ -73,10 +72,10 @@ public class InvoiceServiceTest {
 
     @Test
     public void savePaymentTypeNotExist (){
-        mockSeller(Optional.of(Seller.builder().build()), 1L);
+        mockSeller(Optional.of(User.builder().build()), 1L);
         mockClient(Optional.of(Client.builder().build()), 2L);
         mockPaymentType(Optional.empty(), 1);
-        invoice.setSellerId(1L);
+        invoice.setUserId(1L);
         invoice.setClientId(2L);
         invoice.setPaymentTypeId(1);
         AppException thrown = Assertions.assertThrows(AppException.class, () -> invoiceService.save(invoice));
@@ -87,11 +86,11 @@ public class InvoiceServiceTest {
 
     @Test
     public void saveSellerPointNotExist (){
-        mockSeller(Optional.of(Seller.builder().build()), 1L);
+        mockSeller(Optional.of(User.builder().build()), 1L);
         mockClient(Optional.of(Client.builder().build()), 2L);
         mockPaymentType(Optional.of(PaymentType.builder().build()), 1);
         mockSellingPoint(Optional.empty(), 1L);
-        invoice.setSellerId(1L);
+        invoice.setUserId(1L);
         invoice.setClientId(2L);
         invoice.setPaymentTypeId(1);
         invoice.setSellingPointId(1L);
@@ -101,7 +100,7 @@ public class InvoiceServiceTest {
 
     @Test
     public void save () throws  AppException{
-        mockSeller(Optional.of(Seller.builder().build()), 1L);
+        mockSeller(Optional.of(User.builder().build()), 1L);
         mockClient(Optional.of(Client.builder().build()), 2L);
         mockPaymentType(Optional.of(PaymentType.builder().build()), 1);
         mockSellingPoint(Optional.of(SellingPoint.builder().build()), 1L);
@@ -119,7 +118,7 @@ public class InvoiceServiceTest {
         Mockito.when(getClientService.findById(idClient)).thenReturn(person);
     }
 
-    private void mockSeller(Optional<Seller> seller, Long idSeller) {
+    private void mockSeller(Optional<User> seller, Long idSeller) {
         Mockito.when(getSellerService.findById(idSeller)).thenReturn(seller);
     }
 

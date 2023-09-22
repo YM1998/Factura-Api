@@ -1,11 +1,9 @@
 package co.com.system.invoice.persistence.attribute;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.*;
 
-import co.com.system.invoice.persistence.product.attribute.ProductAttributeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

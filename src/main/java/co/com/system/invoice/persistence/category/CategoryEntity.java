@@ -2,12 +2,9 @@ package co.com.system.invoice.persistence.category;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
-import co.com.system.invoice.persistence.product.ProductEntity;
 import co.com.system.invoice.persistence.state.StateEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

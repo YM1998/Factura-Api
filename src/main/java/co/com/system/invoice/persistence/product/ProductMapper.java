@@ -6,7 +6,6 @@ import co.com.system.invoice.model.Product;
 import co.com.system.invoice.persistence.attribute.AttributeEntity;
 import co.com.system.invoice.persistence.category.CategoryEntity;
 import co.com.system.invoice.persistence.product.attribute.ProductAttributeEntity;
-import co.com.system.invoice.persistence.sellingpoint.SellingPointEntity;
 import co.com.system.invoice.persistence.state.StateEntity;
 import co.com.system.invoice.utils.DateUtils;
 import org.springframework.stereotype.Component;

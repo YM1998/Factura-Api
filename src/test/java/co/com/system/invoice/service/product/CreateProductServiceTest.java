@@ -4,7 +4,6 @@ import co.com.system.invoice.constants.CodeExceptions;
 import co.com.system.invoice.exception.AppException;
 import co.com.system.invoice.model.Attribute;
 import co.com.system.invoice.model.Product;
-import co.com.system.invoice.model.ProductUpdate;
 import co.com.system.invoice.persistence.product.ProductDataProvider;
 import org.junit.Before;
 import org.junit.Test;

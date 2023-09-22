@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor
 @Data
@@ -32,9 +33,15 @@ public class Invoice {
     private String clientNit;
     private String clientName;
     private String clientNumber;
-    private Long sellerId;
+    private Long userId;
     private Integer sellingPointId;
 
+    public Double getProfits(){
+        if(Objects.nonNull(cost) || Objects.nonNull(total)) {
+            return total -cost;
+        }
+        return 0D;
+    }
 
     public boolean invoiceDetailsIsEmpty() {
         return this.invoiceDetails==null || this.invoiceDetails.isEmpty();

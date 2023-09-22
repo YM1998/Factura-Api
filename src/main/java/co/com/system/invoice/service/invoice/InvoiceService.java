@@ -2,7 +2,6 @@ package co.com.system.invoice.service.invoice;
 
 import co.com.system.invoice.api.invoice.request.InvoiceFindRequest;
 import co.com.system.invoice.api.invoice.response.InvoiceDataResponse;
-import co.com.system.invoice.api.invoice.response.InvoiceResponse;
 import co.com.system.invoice.constants.CodeExceptions;
 import co.com.system.invoice.constants.GeneralConstans;
 import co.com.system.invoice.constants.MovementStockTypes;
@@ -12,7 +11,6 @@ import co.com.system.invoice.mappers.InvoiceDetailToInvoiceDetailPdf;
 import co.com.system.invoice.model.Invoice;
 import co.com.system.invoice.model.InvoiceDetail;
 import co.com.system.invoice.model.MovementStock;
-import co.com.system.invoice.model.Product;
 import co.com.system.invoice.persistence.invoice.InvoiceDataProvider;
 import co.com.system.invoice.service.movement.stock.MovementStockService;
 import co.com.system.invoice.service.pdf.PdfService;
@@ -20,7 +18,7 @@ import co.com.system.invoice.service.client.GetClientService;
 import co.com.system.invoice.service.payment.type.PaymentTypeService;
 import co.com.system.invoice.service.product.GetProductService;
 import co.com.system.invoice.service.product.UpdateProductService;
-import co.com.system.invoice.service.seller.GetSellerService;
+import co.com.system.invoice.service.user.GetUserService;
 import co.com.system.invoice.service.sellingpoint.GetSellingPointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +31,7 @@ public class InvoiceService {
 
     @Autowired private InvoiceDataProvider invoiceDataProvider;
     @Autowired private GetClientService getClientService;
-    @Autowired private GetSellerService getSellerService;
+    @Autowired private GetUserService getUserService;
     @Autowired private UpdateProductService updateProductService;
     @Autowired private PaymentTypeService paymentTypeService;
 
@@ -84,6 +82,7 @@ public class InvoiceService {
           invoiceResponse.setTotal(invoiceResponse.getInvoice().stream().mapToDouble(Invoice::getTotal).sum());
           invoiceResponse.setSubTotal(invoiceResponse.getInvoice().stream().mapToDouble(Invoice::getSubtotal).sum());
           invoiceResponse.setCost(invoiceResponse.getInvoice().stream().mapToDouble(Invoice::getCost).sum());
+          invoiceResponse.setProfits(invoiceResponse.getInvoice().stream().mapToDouble(Invoice::getProfits).sum());
         }
 
         return invoiceResponse;
@@ -101,7 +100,7 @@ public class InvoiceService {
         }
     }
     private void  validateExceptions(Invoice invoice)  throws  AppException{
-        getSellerService.findById(invoice.getSellerId())
+        getUserService.findById(invoice.getUserId())
                 .orElseThrow(()-> new AppException(CodeExceptions.SELLER_NOT_FOUND));
 
         getClientService.findById(invoice.getClientId())

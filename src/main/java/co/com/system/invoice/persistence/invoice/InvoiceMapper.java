@@ -1,13 +1,11 @@
 package co.com.system.invoice.persistence.invoice;
 
 import co.com.system.invoice.model.Invoice;
-import co.com.system.invoice.model.PaymentType;
 import co.com.system.invoice.persistence.client.ClientEntity;
 import co.com.system.invoice.persistence.invoice.detail.InvoiceDetailEntity;
 import co.com.system.invoice.persistence.invoice.detail.InvoiceDetailMapper;
 import co.com.system.invoice.persistence.payment.type.PaymentTypeEntity;
-import co.com.system.invoice.persistence.person.PersonEntity;
-import co.com.system.invoice.persistence.seller.SellerEntity;
+import co.com.system.invoice.persistence.user.UserEntity;
 import co.com.system.invoice.persistence.sellingpoint.SellingPointEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +22,7 @@ public class InvoiceMapper {
                 .builder()
                 .iva(invoice.getIva())
                 .client(ClientEntity.builder().id(invoice.getClientId()).build())
-                .seller(SellerEntity.builder().id(invoice.getSellerId()).build())
+                .user(UserEntity.builder().id(invoice.getUserId()).build())
                 .paymentType(PaymentTypeEntity.builder().id(invoice.getPaymentTypeId()).build())
                 .sellingPoint(SellingPointEntity.builder().id(invoice.getSellingPointId()).build())
                 .cost(invoice.getCost())
@@ -52,7 +50,7 @@ public class InvoiceMapper {
                 .clientName(invoiceEntity.getClient().getPerson().getName())
                 .clientNit(invoiceEntity.getClient().getPerson().getNit())
                 .clientNumber(invoiceEntity.getClient().getPerson().getPhone())
-                .sellerId(invoiceEntity.getSeller().getId())
+                .userId(invoiceEntity.getUser().getId())
                 .paymentTypeId(invoiceEntity.getPaymentType().getId())
                 .paymentTypeName(invoiceEntity.getPaymentType().getName())
                 .sellingPointId(invoiceEntity.getSellingPoint().getId())

@@ -14,8 +14,6 @@ import co.com.system.invoice.model.Product;
 import co.com.system.invoice.model.ProductUpdate;
 import co.com.system.invoice.exception.AppException;
 
-import javax.swing.text.html.Option;
-
 @Repository
 public class ProductDataProvider {
 

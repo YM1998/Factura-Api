@@ -18,4 +18,5 @@ public class InvoiceDataResponse {
     private Double total;
     private Double subTotal;
     private Double cost;
+    private Double profits;
 }

@@ -25,7 +25,7 @@ public class InvoiceRequestMapper {
         return Invoice.builder()
                 .paymentTypeId(invoiceRequest.getPaymentTypeId())
                 .clientId(invoiceRequest.getClientId())
-                .sellerId(sellerId)
+                .userId(sellerId)
                 .iva(invoiceDetailList.stream().mapToDouble(InvoiceDetail::getIva).sum())
                 .subtotal(invoiceDetailList.stream().mapToDouble(InvoiceDetail::getSubtotal).sum())
                 .total(invoiceDetailList.stream().mapToDouble(InvoiceDetail::getTotal).sum())

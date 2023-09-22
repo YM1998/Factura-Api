@@ -2,6 +2,8 @@ package co.com.system.invoice.utils;
 
 public class StringUtils {
 
+    public static final String empty = "";
+
     public static boolean isEmpty(String value) {
         return !isNotEmpty(value);
     }
