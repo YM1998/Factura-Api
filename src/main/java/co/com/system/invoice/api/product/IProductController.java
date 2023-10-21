@@ -40,7 +40,7 @@ public interface IProductController {
     @GetMapping(value = "/findByNameOrCode/{filter}")
     public List<Product> findByNameOrCode(@PathVariable("filter") String filter);
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN","ROLE_SELLER"})
     @GetMapping(value = "/findByCode/{code}")
     public Product findByCode(@PathVariable("code") String code) throws AppException;
 

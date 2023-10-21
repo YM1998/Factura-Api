@@ -28,7 +28,7 @@ public class InvoiceController implements  IInvoiceController {
 
     @Override
     public Optional<InvoiceResponse> save(@Valid @RequestBody InvoiceRequest invoice) throws AppException {
-        Invoice invoiceResponse = invoiceService.save(invoiceRequestMapper.invoiceRequestToInvoice(invoice,1, 1L));
+        Invoice invoiceResponse = invoiceService.save(invoiceRequestMapper.invoiceRequestToInvoice(invoice));
         return Optional.of(new InvoiceResponse(invoiceResponse.getId()));
     }
 

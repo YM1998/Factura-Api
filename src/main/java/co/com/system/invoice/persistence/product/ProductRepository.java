@@ -14,7 +14,7 @@ public interface ProductRepository extends  JpaRepository<ProductEntity, Long>{
     @Query("select count(p) from ProductEntity p where p.category.id=?1 ")
     public Long countByIdCategory(Long id);
 
-    @Query("select new co.com.system.invoice.model.Product(p.id,p.inventoryQuantity,p.description,p.createdAt"
+    @Query("select new co.com.system.invoice.model.Product(p.id,p.description,p.createdAt"
             + ",p.update,p.name,p.price,p.creationUser,p.modificationUser,p.category.id,p.category.name,"
             + "p.state.name,p.state.id, at.id, at.name, pa.value, p.cost, pa.id, p.code, p.iva) "
             + "from ProductEntity  p "
@@ -22,12 +22,19 @@ public interface ProductRepository extends  JpaRepository<ProductEntity, Long>{
             + "LEFT JOIN pa.attribute at order by p.name,at.name ")
     public List<Product> findAllProducts();
 
+    @Query(nativeQuery = true,
+    value = "select  p.id, p.name, p.state_id, stk.stock inventoryQuantity " +
+            "from product p " +
+            "left join (select * from selling_points_product_stock spps where spps.selling_point_id =:sellingPointId) stk on stk.product_id = p.id " +
+            "order by p.id")
+    public List<ProductEntity> findByProductWithStockBySellingPoint(@Param("sellingPointId") Integer sellingPointId);
+
 
     @Modifying
     @Query("delete from ProductAttributeEntity pa where pa.id  in (:list)")
     public void deleteAttributes(@Param("list") List<Long> list);
 
-    @Query("select new co.com.system.invoice.model.Product(p.id, p.code, p.inventoryQuantity, "
+    @Query("select new co.com.system.invoice.model.Product(p.id, p.code, "
             + "p.description, p.name, p.price) "
          + "from ProductEntity p where p.code like '%:filter%' or p.name like '%:filter%'")
     public List<Product> findLikeByNameOrCode(@Param("filter") String filter);
@@ -36,14 +43,4 @@ public interface ProductRepository extends  JpaRepository<ProductEntity, Long>{
     public List<ProductEntity>  findByCodeForOtherRecords(final String code, final Long id);
 
     public ProductEntity findByCode(final String code);
-
-    @Modifying
-    @Query("update ProductEntity p set p.inventoryQuantity = p.inventoryQuantity + :amount  where p.id = :id ")
-    public void updateQuantityInventory(@Param("id") Long id, @Param("amount") Integer amount);
-
-
-    @Query("select p from  ProductEntity p where p.sellingPoint.id =:selling_point_id order by p.code asc ")
-    public List<ProductEntity> findBySellingPoint(@Param("selling_point_id") Integer sellingPointId);
-
-
 }

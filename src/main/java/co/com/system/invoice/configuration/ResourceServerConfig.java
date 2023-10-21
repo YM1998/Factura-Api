@@ -2,6 +2,7 @@ package co.com.system.invoice.configuration;
 
 import java.util.Arrays;
 
+import co.com.system.invoice.constants.SecurityContans;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +35,7 @@ public class ResourceServerConfig   extends ResourceServerConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedOrigins(Arrays.asList(SecurityContans.URL_ANGULAR_APP_LOCAL));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PUT","OPTIONS"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(Arrays.asList("Content-type","Authorization"));

@@ -29,6 +29,7 @@ public class MovementStockEntity {
     @Column private Integer movementValue;
     @Column private String reason;
     @Column private LocalDate createdAt;
+    @Column private Integer sellingPointId;
 
     @ManyToOne
     @JoinColumn(name = "type_movement_stock_id")

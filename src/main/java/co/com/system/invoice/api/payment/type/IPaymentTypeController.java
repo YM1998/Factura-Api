@@ -9,7 +9,7 @@ import java.util.List;
 public interface IPaymentTypeController {
 
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_SELLER"})
     @GetMapping(value = "/getAll")
     public List<PaymentType> getAll();
 

@@ -1,6 +1,7 @@
 package co.com.system.invoice.persistence.product;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,13 +20,14 @@ public class ProductDataProvider {
 
 
     @Autowired private ProductRepository productRepository;
+    @Autowired private CustomProductRepository customProductRepository;
     @Autowired private ProductMapper productMapper;
     @Autowired private ProductDataProviderUtil productDataProviderUtil;
 
-    public void save(Product product) {
+    public Product save(Product product) {
         ProductEntity productToPersist = productMapper.toEntity(product);
         productToPersist.setCreatedAt(LocalDate.now());
-        productRepository.save(productToPersist);
+        return productMapper.toData(productRepository.save(productToPersist));
    }
 
     public void updateStatus(Long idProduct, Long statusId ) throws AppException {
@@ -72,21 +74,10 @@ public class ProductDataProvider {
         return product.isPresent()? Optional.of(productMapper.toData(product.get())): Optional.empty();
      }
 
-     public void updateQuantityInventory(Long idProduct, Integer amount ) {
-        productRepository.updateQuantityInventory(idProduct, amount);
-     }
 
      public List<Product> findAll() {
         return  productRepository.findAllProducts();
     }
-
-    public List<Product> findBySellingPoint(Integer sellingPointId) {
-        return  productRepository.findBySellingPoint(sellingPointId)
-                                 .stream()
-                                 .map(productMapper::toData)
-                                 .collect(Collectors.toList());
-    }
-
 
     public List<Product> findByNameOrCode(String filter) {
         return productRepository.findLikeByNameOrCode(filter);
@@ -104,6 +95,11 @@ public class ProductDataProvider {
     public Optional<Product> findByCode(final String code) {
         ProductEntity product = productRepository.findByCode(code);
         return product!=null ?Optional.of(productMapper.toData(product)):Optional.empty();
+    }
+
+
+    public List<Product> findByProductWithStockBySellingPoint(Integer sellingPointId) {
+        return customProductRepository.findByProductWithStockBySellingPoint(sellingPointId);
     }
 
 }

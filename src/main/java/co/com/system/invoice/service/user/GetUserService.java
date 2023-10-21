@@ -1,6 +1,5 @@
 package co.com.system.invoice.service.user;
 
-import co.com.system.invoice.api.user.request.UserLoginRequest;
 import co.com.system.invoice.model.User;
 import co.com.system.invoice.persistence.user.UserDataProvider;
 import org.springframework.beans.factory.annotation.Autowired;

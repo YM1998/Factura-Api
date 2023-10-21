@@ -12,6 +12,7 @@ public class MovementStockMapper {
     public MovementStockEntity toEntity(MovementStock movementStock) {
         return MovementStockEntity.builder()
                 .id(movementStock.getId())
+                .sellingPointId(movementStock.getSellingPointId())
                 .reason(movementStock.getReason())
                 .currentValue(movementStock.getCurrentValue())
                 .lastValue(movementStock.getLastValue())
@@ -26,6 +27,7 @@ public class MovementStockMapper {
     public MovementStock toData(MovementStockEntity movementStockEntity) {
         return MovementStock.builder()
                 .id(movementStockEntity.getId())
+                .sellingPointId(movementStockEntity.getSellingPointId())
                 .reason(movementStockEntity.getReason())
                 .currentValue(movementStockEntity.getCurrentValue())
                 .lastValue(movementStockEntity.getLastValue())

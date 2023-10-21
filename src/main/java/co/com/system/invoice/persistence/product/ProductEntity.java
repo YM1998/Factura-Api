@@ -34,7 +34,6 @@ public class ProductEntity implements Serializable {
 	@Column
 	private Long id;
 	@Column private String code;
-	@Column private Integer inventoryQuantity;
 	@Column private String description;
 	@Column private LocalDate createdAt;
 	@Column  private LocalDate update;
@@ -53,12 +52,12 @@ public class ProductEntity implements Serializable {
     @JoinColumn(name="state_id")
     private StateEntity state;
 
-	@ManyToOne
-	@JoinColumn(name="selling_point_id")
-	private SellingPointEntity sellingPoint;
-
 	@OneToMany(mappedBy="product", cascade = CascadeType.ALL)
 	private List<ProductAttributeEntity> attributeProducts;
+
+	@Transient
+	private Integer inventoryQuantity;
+
 
 	@PrePersist
 	public void prePersist() {

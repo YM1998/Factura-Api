@@ -3,7 +3,9 @@ package co.com.system.invoice.service.product;
 import co.com.system.invoice.constants.CodeExceptions;
 import co.com.system.invoice.exception.AppException;
 import co.com.system.invoice.model.Product;
+import co.com.system.invoice.model.ProductStock;
 import co.com.system.invoice.persistence.product.ProductDataProvider;
+import co.com.system.invoice.persistence.product.stock.ProductStockDataProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class GetProductService {
     @Autowired  private ProductDataProvider productDataProvider;
+    @Autowired  private ProductStockDataProvider productStockDataProvider;
 
 
     public Long countByIdCategory(Long idCategory){
@@ -35,8 +38,8 @@ public class GetProductService {
     }
 
 
-    public List<Product> findBySellingPoint(Integer sellingPointId) {
-        return productDataProvider.findBySellingPoint(sellingPointId);
+    public List<Product> findByProductWithStockBySellingPoint(Integer sellingPointId) {
+        return productDataProvider.findByProductWithStockBySellingPoint(sellingPointId);
     }
 
 

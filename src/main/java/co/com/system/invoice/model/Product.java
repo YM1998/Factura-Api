@@ -28,7 +28,6 @@ public class Product implements Serializable {
 	 * Costructor usado para query JPA
 	 * @author Yesid Murillo
 	 * @param idProduct
-	 * @param inventoryQuantity
 	 * @param description
 	 * @param creationDate
 	 * @param modificationDate
@@ -42,7 +41,7 @@ public class Product implements Serializable {
 	 * @param statusId
 	 * @param attributes
 	 */
-    public Product(Long idProduct, Integer inventoryQuantity,
+    public Product(Long idProduct,
                    String description, LocalDate creationDate, LocalDate modificationDate,
                    String name, double price, String userCreation,
                    String userModification, Long idCategory, String categoryName,
@@ -51,7 +50,6 @@ public class Product implements Serializable {
                    String productCode, Double iva) {
         super();
         this.idProduct = idProduct;
-        this.inventoryQuantity = inventoryQuantity;
         this.description = description;
         this.creationDate = DateUtils.convertDateToString(creationDate, DateFormats.DD_MM_YYYY.getValue());
         this.modificationDate = DateUtils.convertDateToString(modificationDate, DateFormats.DD_MM_YYYY.getValue());
@@ -79,12 +77,11 @@ public class Product implements Serializable {
     }
 
 
-    public Product(Long idProduct, String codigo, Integer inventoryQuantity,
+    public Product(Long idProduct, String codigo,
                    String description, String name, Double price) {
         super();
         this.idProduct = idProduct;
         this.codigo = codigo;
-        this.inventoryQuantity = inventoryQuantity;
         this.description = description;
         this.name = name;
         this.price = price;
@@ -99,7 +96,6 @@ public class Product implements Serializable {
     @NotBlank(message = "El campo codigo es obligatorio")
     private String codigo;
 
-    @NotNull(message = "Ingrese el cantidad en stok del producto")
     private Integer inventoryQuantity;
 	private String description;
 	private String creationDate;
@@ -129,7 +125,6 @@ public class Product implements Serializable {
 	private String categoryName;
 	private String statusName;
 
-    private Integer sellingPointId;
 
 	@NotNull(message = "El estado es obligatorio")
 	private Long statusId;

@@ -28,5 +28,7 @@ public class MovementStock {
     @NotNull(message = "Ingrese el producto")
     private Long productId;
     private LocalDate createdAt;
+    @NotNull(message = "Ingrese el punto de venta")
+    private Integer sellingPointId;
 
 }

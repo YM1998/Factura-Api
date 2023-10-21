@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface IClientController {
 
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN","ROLE_SELLER"})
     @GetMapping(value = "/find/{id}")
     public Optional<ClientResponse> findById(@PathVariable("id") Long id);
 

@@ -19,7 +19,6 @@ public class ProductMapper {
 
     public ProductEntity toEntity(Product input) {
         ProductEntity product = ProductEntity.builder()
-                .inventoryQuantity(input.getInventoryQuantity())
                 .category(CategoryEntity.builder().id(input.getIdCategory()).build())
                 .description(input.getDescription())
                 .state(StateEntity.builder().id(input.getStatusId()).build())
@@ -52,7 +51,6 @@ public class ProductMapper {
 
     public Product toData(ProductEntity input) {
         return Product.builder()
-                .inventoryQuantity(input.getInventoryQuantity())
                 .idCategory(input.getCategory()!=null ? input.getCategory().getId() : null)
                 .categoryName(input.getCategory()!=null? input.getCategory().getName() : null)
                 .creationDate(DateUtils.convertDateToString(input.getCreatedAt(), DateFormats.DD_MM_YYYY.getValue()))
@@ -69,7 +67,6 @@ public class ProductMapper {
                 .statusName(input.getState()!=null? input.getState().getName():null)
                 .codigo(input.getCode())
                 .iva(input.getIva())
-                .sellingPointId(input.getSellingPoint().getId())
                 .build();
     }
 
@@ -92,7 +89,6 @@ public class ProductMapper {
 
 
         public void translateReference(Product input, ProductEntity output) {
-            output.setInventoryQuantity(input.getInventoryQuantity());
             output.setCategory(CategoryEntity.builder().id(input.getIdCategory()).build());
             output.setDescription(input.getDescription());
             output.setState(StateEntity.builder().id(input.getStatusId()).build());

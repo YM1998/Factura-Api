@@ -30,11 +30,6 @@ public class UpdateProductService {
     }
 
     @Transactional
-    public void updateQuantityInventory(Long idProduct, Integer amount) {
-        productDataProvider.updateQuantityInventory(idProduct, amount);
-    }
-
-    @Transactional
     public void updateStatus(Long idProduct, Long idStatus) throws AppException {
         productDataProvider.updateStatus(idProduct, idStatus);
     }

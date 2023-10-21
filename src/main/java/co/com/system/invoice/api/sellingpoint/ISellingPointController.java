@@ -13,7 +13,7 @@ public interface ISellingPointController {
     @GetMapping(value = "/getAll")
     public  List<SellingPoint> getAll();
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_SELLER"})
     @GetMapping(value = "/find/{id}")
     public Optional<SellingPoint> findById(@PathVariable("id") Integer id);
 

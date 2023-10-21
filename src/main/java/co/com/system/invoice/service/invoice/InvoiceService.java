@@ -96,7 +96,9 @@ public class InvoiceService {
                     .builder()
                     .typeMovementStockId(MovementStockTypes.STOCK_OUT_BY_SALES.getValue())
                     .movementValue(invoiceDetail.getAmount())
-                    .productId(invoiceDetail.getProductId()).build());
+                    .productId(invoiceDetail.getProductId())
+                    .sellingPointId(invoice.getSellingPointId())
+                    .build());
         }
     }
     private void  validateExceptions(Invoice invoice)  throws  AppException{

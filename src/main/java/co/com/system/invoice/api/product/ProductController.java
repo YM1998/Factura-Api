@@ -44,7 +44,7 @@ public class ProductController implements  IProductController {
 
     @Override
     public List<Product> getAll(Integer sellingPointId) {
-        return getProductService.findBySellingPoint(sellingPointId);
+        return getProductService.findByProductWithStockBySellingPoint(sellingPointId);
     }
 
     @Override
