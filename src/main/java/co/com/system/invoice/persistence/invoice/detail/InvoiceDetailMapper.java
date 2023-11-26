@@ -4,6 +4,7 @@ import co.com.system.invoice.model.InvoiceDetail;
 import co.com.system.invoice.persistence.product.ProductEntity;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class InvoiceDetailMapper {
 

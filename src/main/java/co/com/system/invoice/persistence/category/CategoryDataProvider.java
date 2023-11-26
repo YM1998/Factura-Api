@@ -3,16 +3,19 @@ package co.com.system.invoice.persistence.category;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import co.com.system.invoice.model.Category;
 
+@RequiredArgsConstructor
 @Repository
 public class CategoryDataProvider {
 
 
-    @Autowired private CategoryRepository categoryRepository;
-    @Autowired private CategoryMapper categoryMapper;
+    private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
 
     public void save(final Category category){
         categoryRepository.save(categoryMapper.toEntity(category));

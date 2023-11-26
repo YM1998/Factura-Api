@@ -4,10 +4,12 @@ import co.com.system.invoice.constants.CodeExceptions;
 import co.com.system.invoice.exception.AppException;
 import co.com.system.invoice.model.Category;
 import co.com.system.invoice.persistence.category.CategoryDataProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class UpdateCategoryService {
 

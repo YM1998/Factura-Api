@@ -6,7 +6,7 @@ import co.com.system.invoice.service.category.CreateCategoryService;
 import co.com.system.invoice.service.category.DeleteCategoryService;
 import co.com.system.invoice.service.category.GetCategoryService;
 import co.com.system.invoice.service.category.UpdateCategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +17,15 @@ import co.com.system.invoice.exception.AppException;
 
 import javax.validation.Valid;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/category")
 public class CategoryController implements  ICategoryController{
 
-    @Autowired private CreateCategoryService createCategoryService;
-    @Autowired private UpdateCategoryService updateCategoryService;
-    @Autowired private DeleteCategoryService deleteCategoryService;
-    @Autowired private GetCategoryService getCategoryService;
+    private final  CreateCategoryService createCategoryService;
+    private final  UpdateCategoryService updateCategoryService;
+    private final DeleteCategoryService deleteCategoryService;
+    private final GetCategoryService getCategoryService;
 
 
 

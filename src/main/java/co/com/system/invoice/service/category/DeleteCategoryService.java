@@ -4,14 +4,16 @@ import co.com.system.invoice.constants.CodeExceptions;
 import co.com.system.invoice.exception.AppException;
 import co.com.system.invoice.persistence.category.CategoryDataProvider;
 import co.com.system.invoice.service.product.GetProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class DeleteCategoryService {
-    @Autowired private GetProductService getProductService;
-    @Autowired private CategoryDataProvider categoryDataProvider;
+    private final GetProductService getProductService;
+    private final CategoryDataProvider categoryDataProvider;
 
     @Transactional
     public void delete(final Long idCategory) throws AppException {

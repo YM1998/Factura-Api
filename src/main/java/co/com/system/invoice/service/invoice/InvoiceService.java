@@ -20,26 +20,29 @@ import co.com.system.invoice.service.product.GetProductService;
 import co.com.system.invoice.service.product.UpdateProductService;
 import co.com.system.invoice.service.user.GetUserService;
 import co.com.system.invoice.service.sellingpoint.GetSellingPointService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class InvoiceService {
 
-    @Autowired private InvoiceDataProvider invoiceDataProvider;
-    @Autowired private GetClientService getClientService;
-    @Autowired private GetUserService getUserService;
-    @Autowired private UpdateProductService updateProductService;
-    @Autowired private PaymentTypeService paymentTypeService;
+    private final  InvoiceDataProvider invoiceDataProvider;
+    private final GetClientService getClientService;
+    private final GetUserService getUserService;
+    private final UpdateProductService updateProductService;
+    private final PaymentTypeService paymentTypeService;
 
-    @Autowired private GetSellingPointService getSellingPointService;
+    private final GetSellingPointService getSellingPointService;
 
-    @Autowired private PdfService pdfService;
+    private final PdfService pdfService;
 
-    @Autowired private InvoiceDetailToInvoiceDetailPdf invoiceDetailToInvoiceDetailPdf;
+    private final InvoiceDetailToInvoiceDetailPdf invoiceDetailToInvoiceDetailPdf;
 
     @Autowired private GetProductService getProductService;
 
@@ -69,7 +72,14 @@ public class InvoiceService {
         parameters.put("items",invoice.get().getInvoiceDetails()
                                             .stream()
                                             .map(invoiceDetailToInvoiceDetailPdf::toInvoiceDetailPdf).collect(Collectors.toList()));
-        return pdfService.generatePdfFromHtml(PdfTemplate.PDF_INVOICE,parameters,GeneralConstans.INVOICE_INITIAL.concat(invoice.get().getId().toString()));
+
+        try {
+            return pdfService.generatePdfFromHtml(PdfTemplate.PDF_INVOICE, parameters, GeneralConstans.INVOICE_INITIAL.concat(invoice.get().getId().toString()));
+        }catch (AppException apx) {
+            throw apx;
+        }catch (FileNotFoundException fx){
+            throw new AppException(CodeExceptions.PDF_ERROR);
+        }
     }
 
     public InvoiceDataResponse findByCreatedAt(InvoiceFindRequest invoiceFindRequest) {

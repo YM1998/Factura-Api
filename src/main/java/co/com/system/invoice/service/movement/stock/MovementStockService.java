@@ -9,26 +9,22 @@ import co.com.system.invoice.persistence.movement.stock.MovementStockDataProvide
 import co.com.system.invoice.persistence.movement.stock.type.MovementStockTypeDataProvider;
 import co.com.system.invoice.service.product.GetProductService;
 import co.com.system.invoice.service.product.stock.ProductStockService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
+@RequiredArgsConstructor
 @Service
 public class MovementStockService {
 
-    @Autowired
-    private MovementStockDataProvider movementStockDataProvider;
+    private final MovementStockDataProvider movementStockDataProvider;
+    private final MovementStockTypeDataProvider movementStockTypeDataProvider;
 
-    @Autowired
-    private MovementStockTypeDataProvider movementStockTypeDataProvider;
+    private final ProductStockService productStockService;
 
-    @Autowired
-    private ProductStockService productStockService;
-
-    @Autowired
-    private GetProductService getProductService;
+    private final  GetProductService getProductService;
 
 
     @Transactional
@@ -44,7 +40,7 @@ public class MovementStockService {
         movementStock.setCreatedAt(LocalDate.now());
         movementStockDataProvider.save(movementStock);
 
-        if(movementStock.getTypeMovementStockId() == MovementStockTypes.STOCK_UPDATE.getValue()) {
+        if(movementStock.getTypeMovementStockId().equals(MovementStockTypes.STOCK_UPDATE.getValue())) {
             productStockService.updateQuantityInventory(productStock.getProductId(), movementValue, movementStock.getSellingPointId());
         }else{
             productStockService.updateQuantityInventoryByOperation(productStock.getProductId(), movementValue,  movementStock.getSellingPointId());
@@ -59,8 +55,8 @@ public class MovementStockService {
     }
 
     private Integer determineOperation(MovementStock movementStock) {
-        if(movementStock.getTypeMovementStockId() == MovementStockTypes.STOCK_OUT.getValue() ||
-           movementStock.getTypeMovementStockId() == MovementStockTypes.STOCK_OUT_BY_SALES.getValue()) {
+        if(movementStock.getTypeMovementStockId().equals(MovementStockTypes.STOCK_OUT.getValue()) ||
+           movementStock.getTypeMovementStockId().equals(MovementStockTypes.STOCK_OUT_BY_SALES.getValue())) {
             return -(movementStock.getMovementValue());
         }
         return movementStock.getMovementValue();

@@ -4,6 +4,7 @@ public class SecurityUtils {
 
     private static final String SEPARATOR = "-";
     private static final Integer DEFAULT_COMPANY = 0;
+    private static final Integer ONE = 1;
 
     public static String getUserName(String userName){
         String arrayData[] = userName.split(SEPARATOR);
@@ -12,7 +13,7 @@ public class SecurityUtils {
 
     public static Integer getSellingPoint(String userName){
         String arrayData[] = userName.split(SEPARATOR);
-        if(arrayData.length>1) {
+        if(arrayData.length > ONE) {
             return Integer.valueOf(arrayData[1]);
         }
         return DEFAULT_COMPANY;

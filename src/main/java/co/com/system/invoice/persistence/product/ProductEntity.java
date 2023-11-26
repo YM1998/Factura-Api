@@ -36,7 +36,8 @@ public class ProductEntity implements Serializable {
 	@Column private String code;
 	@Column private String description;
 	@Column private LocalDate createdAt;
-	@Column  private LocalDate update;
+	@Column(name = "update_date")
+	private LocalDate update;
 	@Column private String name;
 	@Column private Double price;
 	@Column private Double cost;

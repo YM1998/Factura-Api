@@ -24,15 +24,11 @@ import java.util.Map;
 public class PdfService {
 
 
-    public String generatePdfFromHtml(PdfTemplate templateName, Map<String,Object> parameters, String namePdf) throws  AppException {
-        OutputStream outputStream = null;
-        String outputFolder = null;
+    public String generatePdfFromHtml(PdfTemplate templateName, Map<String,Object> parameters, String namePdf) throws AppException, FileNotFoundException {
+        String outputFolder = GeneralConstans.URI_FILES_PDF.concat(File.separator).concat(namePdf).concat(GeneralConstans.PDF_EXT);
+        OutputStream outputStream = new FileOutputStream(outputFolder);
         try {
             String html = parseThymeleafTemplate(templateName.name(), parameters);
-            outputFolder = GeneralConstans.URI_FILES_PDF.concat(File.separator).concat(namePdf).concat(GeneralConstans.PDF_EXT);
-            System.out.println(outputFolder);
-            outputStream = new FileOutputStream(outputFolder);
-
             ITextRenderer renderer = new ITextRenderer();
             renderer.setDocumentFromString(html);
             renderer.layout();
@@ -51,6 +47,7 @@ public class PdfService {
             }
         }
     }
+
 
     private String parseThymeleafTemplate(String templateName, Map<String,Object> parameters) {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();

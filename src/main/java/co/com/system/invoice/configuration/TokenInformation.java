@@ -6,7 +6,8 @@ import co.com.system.invoice.service.sellingpoint.GetSellingPointService;
 import co.com.system.invoice.service.user.GetUserService;
 import co.com.system.invoice.utils.SecurityUtils;
 import co.com.system.invoice.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -17,14 +18,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Component
 public class TokenInformation implements TokenEnhancer {
 
-    @Autowired
-    private GetUserService getUserService;
-
-    @Autowired
-    private GetSellingPointService getSellingPointService;
+    private final  GetUserService getUserService;
+    private final GetSellingPointService getSellingPointService;
 
 
 

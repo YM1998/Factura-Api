@@ -50,6 +50,7 @@ apply plugin: 'io.spring.dependency-management'
 
 apply plugin: 'pmd'
 apply plugin: "org.sonarqube"
+apply plugin: 'war'
 
 group = 'co.com.system.invoice'
 archivesBaseName = 'facturacion-api'
@@ -63,30 +64,46 @@ sourceCompatibility = 1.8
 
 apply from: 'service-dependencies.gradle'
 
+apply plugin: 'war'
+war {
+	baseName = 'factura-api'
+	version = '0.0.1-SNAPSHOT'
+}
+
+
 repositories {
 	mavenLocal()
 	mavenCentral()
 	maven { url "https://repo.spring.io/milestone" }
 }
 
+
+bootRun {
+	sourceResources sourceSets.main
+}
+
 dependencies {
-	//implementation SPRING_BOOT_RUNTIME
-	//compile LOMBOK, LOG4J2, COMMONS_LANG, SWAGGER, JPA_PERSISTENCE, SPRING_SECURITY_OAUTH, SPRING_SECURITY_JWT
-	//testImplementation SPRING_BOOT_UT, MOCKING
-	// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
 	testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	implementation 'org.springframework:spring-context-support'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.postgresql:postgresql:42.2.5'
+	//implementation 'org.postgresql:postgresql:42.2.5'
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mockito:mockito-core:2.8.47'
+	//annotationProcessor 'org.projectlombok:lombok:1.18.24'
+	//testCompileOnly 'org.projectlombok:lombok:1.18.24'
+	//testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+
 	compileOnly 'org.projectlombok:lombok:1.18.24'
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'
 	testCompileOnly 'org.projectlombok:lombok:1.18.24'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+
 	implementation "org.mapstruct:mapstruct:1.4.2.Final"
 	annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
 	implementation 'org.springframework.security:spring-security-jwt:1.0.9.RELEASE'

@@ -2,14 +2,15 @@ package co.com.system.invoice.persistence.client;
 
 import co.com.system.invoice.model.Client;
 import co.com.system.invoice.persistence.person.PersonMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+@RequiredArgsConstructor
 @Component
 public class ClientMapper {
 
 
-    @Autowired private PersonMapper personMapper;
+    private final PersonMapper personMapper;
 
     public Client toData(ClientEntity client) {
         return Client.builder()

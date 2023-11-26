@@ -6,8 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@SpringBootApplication
-public class GeneratePassword implements CommandLineRunner {
+public class GeneratePassword {
+
+    /*implements CommandLineRunner {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -25,5 +26,5 @@ public class GeneratePassword implements CommandLineRunner {
             String passwordBc =bCryptPasswordEncoder.encode(password);
             System.out.println(passwordBc);
         }
-    }
+    }*/
 }

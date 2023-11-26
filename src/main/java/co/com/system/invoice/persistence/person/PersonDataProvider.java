@@ -1,16 +1,17 @@
 package co.com.system.invoice.persistence.person;
 
 import co.com.system.invoice.model.Person;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Repository
 public class PersonDataProvider {
 
-    @Autowired private PersonRepository personRepository;
-    @Autowired private PersonMapper personMapper;
+    private final PersonRepository personRepository;
+    private final PersonMapper personMapper;
 
 
     public Optional<Person>  findById(Long id) {

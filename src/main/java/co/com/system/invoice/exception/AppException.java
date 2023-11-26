@@ -2,12 +2,14 @@ package co.com.system.invoice.exception;
 
 import co.com.system.invoice.constants.CodeExceptions;
 import co.com.system.invoice.utils.PropertiesUtil;
+import lombok.Getter;
 
+@Getter
 public class AppException extends Exception{
 
     private static final long serialVersionUID = 1L;
 
-    private String codError = null;
+    private String codError;
 
 
     public AppException(final CodeExceptions codError) {
@@ -15,8 +17,8 @@ public class AppException extends Exception{
         this.codError = codError.getValue();
     }
 
-    public String getCodError() {
+    /*public String getCodError() {
         return codError;
-    }
+    }*/
 
 }

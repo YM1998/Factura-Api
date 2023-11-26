@@ -8,16 +8,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import co.com.system.invoice.model.Product;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import co.com.system.invoice.constants.GeneralConstans;
 import co.com.system.invoice.model.ProductFilter;
 
+@RequiredArgsConstructor
 @Repository
 public class CustomProductRepositoryImpl implements CustomProductRepository{
 
-    @Autowired private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Override
     public List<ProductEntity> findByCriteria(final ProductFilter productFilter) {
@@ -36,7 +37,7 @@ public class CustomProductRepositoryImpl implements CustomProductRepository{
     @Override
     public List<Product> findByProductWithStockBySellingPoint(Integer sellingPointId) {
 
-        String sql = "select  p.id, p.name, p.state_id, stk.stock inventoryQuantity " +
+        String sql = "select  p.id, p.code, p.name, p.state_id, stk.stock inventoryQuantity " +
                 "from product p " +
                 "left join (select * from selling_points_product_stock spps where spps.selling_point_id =:sellingPointId) stk on stk.product_id = p.id " +
                 "order by p.id ";
@@ -49,10 +50,11 @@ public class CustomProductRepositoryImpl implements CustomProductRepository{
                 .stream()
                 .map(objects ->
                     Product.builder()
-                           .idProduct(((BigInteger)objects[0]).longValue())
-                           .name((String)objects[1])
-                           .statusId(((BigInteger)objects[0]).longValue())
-                           .inventoryQuantity(objects[3]!=null? (Integer)objects[3]: null)
+                           .idProduct(((Integer)objects[0]).longValue())
+                           .codigo((String)objects[1])
+                           .name((String)objects[2])
+                           .statusId(((Integer)objects[3]).longValue())
+                           .inventoryQuantity(objects[4]!=null? (Integer)objects[4]: null)
                            .build()
                 ).collect(Collectors.toList());
     }

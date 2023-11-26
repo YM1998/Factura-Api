@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import co.com.system.invoice.service.product.CreateProductService;
 import co.com.system.invoice.service.product.GetProductService;
 import co.com.system.invoice.service.product.UpdateProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +18,14 @@ import co.com.system.invoice.model.Product;
 import co.com.system.invoice.model.ProductUpdate;
 import co.com.system.invoice.exception.AppException;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/product")
 public class ProductController implements  IProductController {
 
-    @Autowired private GetProductService getProductService;
-    @Autowired private CreateProductService createProductService;
-    @Autowired private UpdateProductService updateProductService;
+    private final GetProductService getProductService;
+    private final CreateProductService createProductService;
+    private final UpdateProductService updateProductService;
 
 
     @Override

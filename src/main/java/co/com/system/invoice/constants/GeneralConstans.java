@@ -18,4 +18,5 @@ public class GeneralConstans {
 
     public static final String URI_FILES_PDF ="C:\\Users\\yesid\\Documents\\facturas-pdf";
 
+    public static final String FORMAT_STR = "%,d";
 }

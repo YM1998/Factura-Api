@@ -4,18 +4,19 @@ import co.com.system.invoice.model.Invoice;
 import co.com.system.invoice.model.InvoiceDetail;
 import co.com.system.invoice.model.Product;
 import co.com.system.invoice.service.product.GetProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
 public class InvoiceRequestMapper {
 
 
-    @Autowired private GetProductService productService;
+   private final  GetProductService productService;
 
     public Invoice invoiceRequestToInvoice(InvoiceRequest invoiceRequest) {
 

@@ -7,15 +7,16 @@ import co.com.system.invoice.persistence.invoice.detail.InvoiceDetailMapper;
 import co.com.system.invoice.persistence.payment.type.PaymentTypeEntity;
 import co.com.system.invoice.persistence.user.UserEntity;
 import co.com.system.invoice.persistence.sellingpoint.SellingPointEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
 public class InvoiceMapper {
 
-    @Autowired private InvoiceDetailMapper invoiceDetailMapper;
+    private final InvoiceDetailMapper invoiceDetailMapper;
 
     public InvoiceEntity toEntity(Invoice invoice){
         InvoiceEntity invoiceEntity =  InvoiceEntity

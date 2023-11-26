@@ -16,23 +16,21 @@ public class PropertiesUtil {
 
 
     public  String getPropValues(String fileName, String code)  {
-        String result = "";
-        InputStream inputStream=null;
-
+        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
         try {
             Properties prop = new Properties();
-            inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
             prop.load(inputStream);
-            result  = prop.getProperty(code);
+            return  prop.getProperty(code);
         } catch (Exception e) {
+            return StringUtils.empty;
         } finally {
             if(inputStream!=null)
                 try {
                     inputStream.close();
                 } catch (IOException e) {
+                    e.printStackTrace();
                 }
         }
-        return result;
     }
 
 

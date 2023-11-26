@@ -2,6 +2,7 @@ package co.com.system.invoice.persistence.product.stock;
 
 import co.com.system.invoice.model.Product;
 import co.com.system.invoice.model.ProductStock;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -9,11 +10,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Repository
 public class ProductStockDataProvider {
 
-    @Autowired ProductStockEntityRepository productStockEntityRepository;
-    @Autowired ProductEntityMapper productEntityMapper;
+    private final ProductStockEntityRepository productStockEntityRepository;
+    private final ProductEntityMapper productEntityMapper;
 
 
 

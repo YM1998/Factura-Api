@@ -1,16 +1,17 @@
 package co.com.system.invoice.persistence.user;
 
 import co.com.system.invoice.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Repository
 public class UserDataProvider {
 
-    @Autowired private UserRepository userRepository;
-    @Autowired private UserMapper userMapper;
+     private final UserRepository userRepository;
+     private final UserMapper userMapper;
 
     public Optional<User> findById(Long id) {
         Optional<UserEntity> sellerEntity = userRepository.findById(id);
@@ -22,7 +23,5 @@ public class UserDataProvider {
         UserEntity userEntity = userRepository.findByUserAccount(userAccount);
         return userEntity!=null ? Optional.of(userMapper.toData(userEntity)): Optional.empty();
     }
-
-
 
 }

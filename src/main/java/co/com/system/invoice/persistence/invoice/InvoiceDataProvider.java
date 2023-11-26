@@ -2,21 +2,19 @@ package co.com.system.invoice.persistence.invoice;
 
 
 import co.com.system.invoice.api.invoice.request.InvoiceFindRequest;
-import co.com.system.invoice.api.invoice.request.InvoiceRequest;
 import co.com.system.invoice.model.Invoice;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Repository
 public class InvoiceDataProvider {
 
-    @Autowired  private InvoiceRepository invoiceRepository;
-    @Autowired  private InvoiceMapper invoiceMapper;
+    private final InvoiceRepository invoiceRepository;
+    private final InvoiceMapper invoiceMapper;
 
 
 

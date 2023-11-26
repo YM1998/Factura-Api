@@ -5,15 +5,17 @@ import co.com.system.invoice.exception.AppException;
 import co.com.system.invoice.model.Product;
 import co.com.system.invoice.model.ProductUpdate;
 import co.com.system.invoice.persistence.product.ProductDataProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class UpdateProductService {
 
-    @Autowired  private ProductDataProvider productDataProvider;
-    @Autowired private ProductUtil productUtil;
+    @Autowired  private final ProductDataProvider productDataProvider;
+    @Autowired private final ProductUtil productUtil;
 
 
 

@@ -24,7 +24,9 @@ public class MovementStockEntity {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column
     private Long id;
-    @Column private Integer lastValue;
+
+    @Column(name = "last_value_stock")
+    private Integer lastValue;
     @Column private Integer currentValue;
     @Column private Integer movementValue;
     @Column private String reason;

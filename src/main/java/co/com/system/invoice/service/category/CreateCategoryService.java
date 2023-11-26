@@ -6,17 +6,17 @@ import co.com.system.invoice.exception.AppException;
 import co.com.system.invoice.model.Category;
 import co.com.system.invoice.persistence.category.CategoryDataProvider;
 import co.com.system.invoice.utils.DateUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
+@RequiredArgsConstructor
 @Service
 public class CreateCategoryService {
 
-    @Autowired
-    private CategoryDataProvider categoryDataProvider;
+    private final CategoryDataProvider categoryDataProvider;
 
     @Transactional
     public void save(final Category category) throws AppException {

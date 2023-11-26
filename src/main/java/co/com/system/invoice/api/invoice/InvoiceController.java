@@ -9,21 +9,23 @@ import co.com.system.invoice.api.invoice.response.InvoiceResponse;
 import co.com.system.invoice.exception.AppException;
 import co.com.system.invoice.model.Invoice;
 import co.com.system.invoice.service.invoice.InvoiceService;
-import lombok.Builder;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/invoice")
 public class InvoiceController implements  IInvoiceController {
 
-    @Autowired private InvoiceService invoiceService;
-    @Autowired private InvoiceRequestMapper invoiceRequestMapper;
+    private final InvoiceService invoiceService;
+    private final InvoiceRequestMapper invoiceRequestMapper;
 
 
     @Override
@@ -40,5 +42,20 @@ public class InvoiceController implements  IInvoiceController {
     @Override
     public InvoiceDataResponse findByDate(@RequestBody InvoiceFindRequest invoiceFindRequest) {
        return invoiceService.findByCreatedAt(invoiceFindRequest);
+    }
+
+
+
+    public static  int equalizerTeamSize(List<Integer> teamSize, int k) {
+
+      long equipos = teamSize.stream()
+                .filter( x -> x<k)
+                .count() ;
+
+       return teamSize.size() - ((Long) equipos).intValue();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(equalizerTeamSize(Arrays.asList(1,2,3,4,5,6,7), 10));
     }
 }

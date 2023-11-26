@@ -1,28 +1,26 @@
 package co.com.system.invoice.persistence.product;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import co.com.system.invoice.persistence.state.StateEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-
 import co.com.system.invoice.constants.CodeExceptions;
 import co.com.system.invoice.model.Product;
 import co.com.system.invoice.model.ProductUpdate;
 import co.com.system.invoice.exception.AppException;
 
+@RequiredArgsConstructor
 @Repository
 public class ProductDataProvider {
 
 
-    @Autowired private ProductRepository productRepository;
-    @Autowired private CustomProductRepository customProductRepository;
-    @Autowired private ProductMapper productMapper;
-    @Autowired private ProductDataProviderUtil productDataProviderUtil;
+    private final ProductRepository productRepository;
+    private final CustomProductRepository customProductRepository;
+    private final ProductMapper productMapper;
+
+    private final ProductDataProviderUtil productDataProviderUtil;
 
     public Product save(Product product) {
         ProductEntity productToPersist = productMapper.toEntity(product);

@@ -1,6 +1,7 @@
 package co.com.system.invoice.configuration;
 
 import co.com.system.invoice.constants.SecurityContans;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -17,25 +18,22 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 
 import java.util.Arrays;
 
+
+@RequiredArgsConstructor
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
+
     @Qualifier("authenticationManager")
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private TokenInformation tokenInformation;
+    private final TokenInformation tokenInformation;
 
 
-    public AuthorizationServerConfig() {
-        super();
-    }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {

@@ -27,7 +27,8 @@ public class UserEntity {
     @JoinColumn(name="person_id")
     private PersonEntity person;
 
-    @Column private String userAccount;
+    @Column  private String userAccount;
+
     @Column private String password;
 
     @Column

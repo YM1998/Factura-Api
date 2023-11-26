@@ -2,17 +2,17 @@ package co.com.system.invoice.service.movement.stock.type;
 
 import co.com.system.invoice.model.MovementStockType;
 import co.com.system.invoice.persistence.movement.stock.type.MovementStockTypeDataProvider;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class MovementStockTypeService {
 
-    @Autowired
-    private MovementStockTypeDataProvider movementStockTypeDataProvider;
+    private final  MovementStockTypeDataProvider movementStockTypeDataProvider;
 
 
 

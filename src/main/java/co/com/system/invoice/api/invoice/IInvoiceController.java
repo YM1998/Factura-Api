@@ -6,6 +6,7 @@ import co.com.system.invoice.api.invoice.request.InvoiceRequest;
 import co.com.system.invoice.api.invoice.response.GeneratePdfResponse;
 import co.com.system.invoice.api.invoice.response.InvoiceDataResponse;
 import co.com.system.invoice.api.invoice.response.InvoiceResponse;
+import co.com.system.invoice.constants.RolesEnum;
 import co.com.system.invoice.exception.AppException;
 import co.com.system.invoice.model.Invoice;
 import org.springframework.http.HttpStatus;
@@ -21,16 +22,16 @@ import java.util.Optional;
 public interface IInvoiceController {
 
 
-    @Secured({"ROLE_ADMIN", "ROLE_SELLER"})
+    @Secured({RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_SELLER})
     @PostMapping(value = "/save")
     public Optional<InvoiceResponse> save(@Valid @RequestBody final InvoiceRequest invoice) throws AppException;
 
 
-    @Secured({"ROLE_ADMIN", "ROLE_SELLER"})
+    @Secured({RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_SELLER})
     @GetMapping(value = "/generate-pdf/{id}")
     public Optional<GeneratePdfResponse> findById(@PathVariable  Long id) throws AppException;
 
-    @Secured("ROLE_ADMIN")
+    @Secured({RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_SELLER})
     @PostMapping(value = "/getByDate")
     public InvoiceDataResponse findByDate(@RequestBody InvoiceFindRequest invoiceFindRequest);
 

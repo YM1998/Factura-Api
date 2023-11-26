@@ -5,6 +5,7 @@ import co.com.system.invoice.model.Client;
 import co.com.system.invoice.model.ClientResponse;
 import co.com.system.invoice.model.Product;
 import co.com.system.invoice.service.client.GetClientService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,11 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/client")
 public class ClientController implements  IClientController{
 
-    @Autowired private GetClientService getClientService;
+    private final  GetClientService getClientService;
 
 
     @Override

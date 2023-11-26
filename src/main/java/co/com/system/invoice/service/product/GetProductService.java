@@ -3,10 +3,9 @@ package co.com.system.invoice.service.product;
 import co.com.system.invoice.constants.CodeExceptions;
 import co.com.system.invoice.exception.AppException;
 import co.com.system.invoice.model.Product;
-import co.com.system.invoice.model.ProductStock;
 import co.com.system.invoice.persistence.product.ProductDataProvider;
 import co.com.system.invoice.persistence.product.stock.ProductStockDataProvider;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,10 +14,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class GetProductService {
-    @Autowired  private ProductDataProvider productDataProvider;
-    @Autowired  private ProductStockDataProvider productStockDataProvider;
+    private final ProductDataProvider productDataProvider;
+    private final ProductStockDataProvider productStockDataProvider;
 
 
     public Long countByIdCategory(Long idCategory){

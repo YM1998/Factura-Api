@@ -3,16 +3,17 @@ package co.com.system.invoice.persistence.attribute;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import co.com.system.invoice.model.Attribute;
 
+@RequiredArgsConstructor
 @Repository
 public class AttributeDataProvider {
 
-    @Autowired private AttributeRepository attributeRepository;
-    @Autowired private AttributeMapper attributeMapper;
+    private final AttributeRepository attributeRepository;
+    private final AttributeMapper attributeMapper;
 
 
     public List<Attribute> findAll() {

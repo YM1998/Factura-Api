@@ -2,16 +2,17 @@ package co.com.system.invoice.service.sellingpoint;
 
 import co.com.system.invoice.model.SellingPoint;
 import co.com.system.invoice.persistence.sellingpoint.SellingDataProvider;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class GetSellingPointService {
 
-    @Autowired private SellingDataProvider sellingDataProvider;
+    private final SellingDataProvider sellingDataProvider;
 
     public List<SellingPoint> getAll() {
         return sellingDataProvider.findAll();

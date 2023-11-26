@@ -7,20 +7,21 @@ import co.com.system.invoice.model.ProductStock;
 import co.com.system.invoice.persistence.product.ProductDataProvider;
 import co.com.system.invoice.service.product.stock.ProductStockService;
 import co.com.system.invoice.service.sellingpoint.GetSellingPointService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
 @Service
 public class CreateProductService {
 
-    @Autowired  private ProductDataProvider productDataProvider;
+    private final ProductDataProvider productDataProvider;
 
-    @Autowired private ProductUtil productUtil;
+    private final ProductUtil productUtil;
 
-    @Autowired private GetSellingPointService getSellingPointService;
+    private final GetSellingPointService getSellingPointService;
 
-    @Autowired private ProductStockService productStockService;
+    private final ProductStockService productStockService;
 
     @Transactional
     public void save(Product product)  throws AppException {

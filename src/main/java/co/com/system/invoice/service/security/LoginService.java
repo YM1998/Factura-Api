@@ -1,10 +1,9 @@
 package co.com.system.invoice.service.security;
 
 import co.com.system.invoice.model.User;
-import co.com.system.invoice.persistence.user.UserDataProvider;
 import co.com.system.invoice.service.user.GetUserService;
 import co.com.system.invoice.utils.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,12 +15,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class LoginService implements UserDetailsService {
 
-
-    @Autowired
-    private GetUserService userService;
+    private final GetUserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {

@@ -41,7 +41,7 @@ public class Category implements Serializable{
         this.idStatus = idStatus;
         this.status = status;
         this.creationDate = DateUtils.convertDateToString(creationDate, DateFormats.DD_MM_YYYY.getValue());
-        this.modificationDate = DateUtils.convertDateToString(modificationDate, DateFormats.DD_MM_YYYY.getValue());;
+        this.modificationDate = DateUtils.convertDateToString(modificationDate, DateFormats.DD_MM_YYYY.getValue());
         this.creationUser = creationUser;
         this.modificationUser = modificationUser;
     }

@@ -3,17 +3,18 @@ package co.com.system.invoice.persistence.user;
 import co.com.system.invoice.model.User;
 import co.com.system.invoice.persistence.person.PersonMapper;
 import co.com.system.invoice.persistence.roles.RolesMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Component
 public class UserMapper {
 
 
-    @Autowired  private PersonMapper personMapper;
-    @Autowired  private RolesMapper rolesMapper;
+    private final PersonMapper personMapper;
+    private final RolesMapper rolesMapper;
 
 
     public User toData(UserEntity user) {

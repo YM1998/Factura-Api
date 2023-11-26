@@ -30,7 +30,8 @@ public class CategoryEntity implements Serializable {
 	@Column
 	private Long id;
 	@Column  private LocalDate createAt;
-	@Column private LocalDate update;
+	@Column(name = "update_date")
+	private LocalDate update;
 	@Column private String name;
 	@Column
 	private String creationUser;
