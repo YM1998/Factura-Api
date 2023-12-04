@@ -45,17 +45,4 @@ public class InvoiceController implements  IInvoiceController {
     }
 
 
-
-    public static  int equalizerTeamSize(List<Integer> teamSize, int k) {
-
-      long equipos = teamSize.stream()
-                .filter( x -> x<k)
-                .count() ;
-
-       return teamSize.size() - ((Long) equipos).intValue();
-    }
-
-    public static void main(String[] args) {
-        System.out.println(equalizerTeamSize(Arrays.asList(1,2,3,4,5,6,7), 10));
-    }
 }

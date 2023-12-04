@@ -8,4 +8,5 @@ public class SecurityContans {
     public static final int TIME_SESSION = 7200;
 
     public static final String URL_ANGULAR_APP_LOCAL = "http://localhost:4200";
+    public static final String URL_ANGULAR_APP_PROD = "https://factura-app-d7911.web.app";
 }

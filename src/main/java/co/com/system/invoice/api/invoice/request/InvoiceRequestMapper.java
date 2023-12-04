@@ -4,6 +4,7 @@ import co.com.system.invoice.model.Invoice;
 import co.com.system.invoice.model.InvoiceDetail;
 import co.com.system.invoice.model.Product;
 import co.com.system.invoice.service.product.GetProductService;
+import co.com.system.invoice.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,7 @@ public class InvoiceRequestMapper {
                 .subtotal(invoiceDetailList.stream().mapToDouble(InvoiceDetail::getSubtotal).sum())
                 .total(invoiceDetailList.stream().mapToDouble(InvoiceDetail::getTotal).sum())
                 .cost(invoiceDetailList.stream().mapToDouble(InvoiceDetail::getCost).sum())
-                .createdAt(LocalDate.now())
+                .createdAt(DateUtils.getColombianDate())
                 .sellingPointId(invoiceRequest.getSellingPointId())
                 .invoiceDetails(invoiceDetailList)
                 .build();

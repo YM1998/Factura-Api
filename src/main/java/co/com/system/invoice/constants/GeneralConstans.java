@@ -16,7 +16,7 @@ public class GeneralConstans {
     public static final String PDF_EXT =".pdf";
     public static final String INVOICE_INITIAL ="NS";
 
-    public static final String URI_FILES_PDF ="C:\\Users\\yesid\\Documents\\facturas-pdf";
+    public static final String FOLDER_PDF_INVOICE ="invoices-pdfs";
 
     public static final String FORMAT_STR = "%,d";
 }

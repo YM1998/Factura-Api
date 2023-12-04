@@ -33,9 +33,11 @@ insert into category (id, create_at, creation_user, name, update_date, state_id)
 
 
 
-INSERT INTO facturacion_db.person (name, last_name, nit, email, phone)
-VALUES('Luz dary', 'segura', '6654638', 'yesidmurillogura@hotmail.com', '37666484');
+insert into person (name, last_name, nit, email, phone)
+values('Luz dary', 'segura', '6654638', 'yesidmurillogura@hotmail.com', '37666484');
 
-INSERT INTO facturacion_db.person (name, last_name, nit, email, phone)
+INSERT INTO person (name, last_name, nit, email, phone)
 VALUES('Publico General', 'Publico General', 'Publico General', 'PublicoGeneral@hotmail.com', '37666484');
 
+insert into person (name, last_name, nit, email, phone)
+values('Vendedor1', 'Vendedor1', '9987374', 'yesidmurillogura@hotmail.com', '3334443');

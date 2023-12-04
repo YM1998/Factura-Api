@@ -15,35 +15,32 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
+import java.time.*;
+import java.util.*;
 
 @Service
 public class PdfService {
 
 
     public String generatePdfFromHtml(PdfTemplate templateName, Map<String,Object> parameters, String namePdf) throws AppException, FileNotFoundException {
-        String outputFolder = GeneralConstans.URI_FILES_PDF.concat(File.separator).concat(namePdf).concat(GeneralConstans.PDF_EXT);
-        OutputStream outputStream = new FileOutputStream(outputFolder);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
             String html = parseThymeleafTemplate(templateName.name(), parameters);
             ITextRenderer renderer = new ITextRenderer();
             renderer.setDocumentFromString(html);
             renderer.layout();
-            renderer.createPDF(outputStream);
-            return Base64.getEncoder().encodeToString(createByteFile(outputFolder));
+            renderer.createPDF(out);
+            return Base64.getEncoder().encodeToString(out.toByteArray());
         }catch (Exception ex ) {
             ex.printStackTrace();
             throw new AppException(CodeExceptions.PDF_ERROR);
         }finally {
-            try {
-                outputStream.close();
-                File file = new File(outputFolder);
-                file.delete();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(out!=null){
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -62,11 +59,5 @@ public class PdfService {
         return templateEngine.process(templateName, context);
     }
 
-
-
-    private byte[] createByteFile(String path) throws IOException {
-        File file = new File(path);
-        return Files.readAllBytes(file.toPath());
-    }
 
 }

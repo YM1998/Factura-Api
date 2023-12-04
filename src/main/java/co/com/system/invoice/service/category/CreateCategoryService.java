@@ -21,7 +21,7 @@ public class CreateCategoryService {
     @Transactional
     public void save(final Category category) throws AppException {
         validateName(category);
-        category.setCreationDate(DateUtils.convertDateToString(LocalDate.now(), DateFormats.DD_MM_YYYY.getValue()));
+        category.setCreationDate(DateUtils.convertDateToString(DateUtils.getColombianDate(), DateFormats.DD_MM_YYYY.getValue()));
         categoryDataProvider.save(category);
     }
 

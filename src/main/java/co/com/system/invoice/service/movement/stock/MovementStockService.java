@@ -9,6 +9,7 @@ import co.com.system.invoice.persistence.movement.stock.MovementStockDataProvide
 import co.com.system.invoice.persistence.movement.stock.type.MovementStockTypeDataProvider;
 import co.com.system.invoice.service.product.GetProductService;
 import co.com.system.invoice.service.product.stock.ProductStockService;
+import co.com.system.invoice.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +38,7 @@ public class MovementStockService {
 
         movementStock.setLastValue(productStock.getStock());
         movementStock.setCurrentValue(productStock.getStock()+movementValue);
-        movementStock.setCreatedAt(LocalDate.now());
+        movementStock.setCreatedAt(DateUtils.getColombianDate());
         movementStockDataProvider.save(movementStock);
 
         if(movementStock.getTypeMovementStockId().equals(MovementStockTypes.STOCK_UPDATE.getValue())) {
